@@ -8,9 +8,12 @@ export default interface Product {
     expiredDt: string;
     securityAmount: number;
     offerAmount: number;
-    reviewStatus: string;
-    productStatus: string;
+    reviewStatus: 'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'contract' | 'register';
+    productStatus: 'reviewing' | 'reviewed' | 'recruiting' | 'recruited' | 'redeeming' | 'redeemed' | 'overdue';
     holderNm: string;
+    investPeriod: number;
+    productLevel: string;
+    annualReturn: number;
 }
 
 export interface ProductList {

@@ -6,6 +6,7 @@ import {ChangeEvent, useEffect, useState} from "react";
 import Product, {ProductList, ProductListFilter } from "../interface/Product";
 import { selectProductList } from "../api/product";
 import moment from "moment";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 export interface GridDatas<Type> {
     rows: Type[];
@@ -71,7 +72,6 @@ export default function ProductInfo<Type>() {
             }},
         {field: 'reviewStatus', headerName: '진행상태', width: 120,
             renderCell: (params: any) => {
-                console.log('reviewStatus >> ', params.value);
                 if(params.value === 'approve') {
                     return <button type={`button`}>공모확정</button>
                 } else {
@@ -108,7 +108,10 @@ export default function ProductInfo<Type>() {
                     offerAmount: item.offer_amount,
                     reviewStatus: item.review_status,
                     productStatus: item.product_status,
-                    holderNm: item.holder_nm
+                    holderNm: item.holder_nm,
+                    investPeriod: item.invest_period,
+                    productLevel: item.product_level,
+                    annualReturn: item.annualReturn
                 });
             });
             setBoardData({list: boardList, totalCount: totalCount});
@@ -131,7 +134,11 @@ export default function ProductInfo<Type>() {
         <section>
             <h2>투자상품정보</h2>
             <Block>
-                <h3>투자상품 등록</h3>
+                <div style={{display: 'flex'}}>
+                    <h3 style={{textAlign: 'start', padding: '30px', margin: 0}}>투자상품 등록</h3>
+                    <SearchInput></SearchInput>
+                    <MoreButton><MoreHorizIcon></MoreHorizIcon></MoreButton>
+                </div>
                 <DataGrid
                     rows={boardData.list}
                     columns={columns}
@@ -228,3 +235,25 @@ const Block = styled.div`
   height: 900px;
 `;
 
+const SearchInput = styled.input.attrs({type: 'text'})`
+  text-indent: 20px;
+  width: 250px;
+  height: 40px;
+  border: none;
+  background: #f5f7fe;
+  border-radius: 10px;
+`;
+
+const MoreButton = styled.button.attrs({type: 'button'})`
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  border: none;
+  flex-wrap: none;
+  align-items: center;
+  background: #f5f7fe;
+  color: #4319ff;
+`
