@@ -13,13 +13,11 @@ export default function Navigation() {
     const location = useLocation();
     const pathname = location.pathname.split('/')[1];
 
-    console.log('pahtname >> ', pathname);
-
     return (
         <Nav>
-            <div>
-                <h1>Metaripae Admin</h1>
-            </div>
+            <h1>
+                <a href={`/`}>Metaripae Admin</a>
+            </h1>
             <ul>
                 <NavItem isActive={pathname === 'dashboard'}><HomeIcon color={`primary`}></HomeIcon><a href="/dashboard">대시보드</a></NavItem>
                 <NavItem isActive={pathname === 'memberInfo'}><PersonIcon color={`primary`}></PersonIcon><a href="/memberInfo">회원정보</a></NavItem>
@@ -33,7 +31,17 @@ const Nav = styled.nav`
   display: block;
   
   h1 {
+    padding: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #f5f7fe; 
+    text-align: center;
     color: #2b3675;
+    a:link, a:visited {
+      color: #2b3675;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 26px;
+    }
   }
   
   ul {

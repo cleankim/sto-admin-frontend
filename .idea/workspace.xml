@@ -2,11 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d257b290-684e-4c0c-bd0d-205116394be3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/assets/GlobalStyle.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/reset.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/product/ProductListMain.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/date.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/product.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gnb/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gnb/Navbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/gnb/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gnb/Navigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/productInfo/ProductInfoDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/ProductDetail.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/interface/Product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface/Product.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LoginForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/ProductInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProductInfo.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +54,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/interface" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -56,6 +63,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
+      <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$/src/interface" />
       <recent name="$PROJECT_DIR$/src/components/gnb" />
       <recent name="$PROJECT_DIR$/src" />
@@ -76,6 +85,14 @@
       <workItem from="1676428926907" duration="4585000" />
       <workItem from="1676436981186" duration="24472000" />
     </task>
+    <task id="LOCAL-00001" summary="[sto-26] 관리자 진행중">
+      <created>1676626070394</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676626070394</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -83,5 +100,9 @@
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[sto-26] 관리자 진행중" />
+    <option name="LAST_COMMIT_MESSAGE" value="[sto-26] 관리자 진행중" />
   </component>
 </project>

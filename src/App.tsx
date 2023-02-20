@@ -5,12 +5,14 @@ import Navbar from './components/gnb/Navbar';
 import Navigation from "./components/gnb/Navigation";
 import styled from 'styled-components';
 import axios from 'axios';
+import {GlobalStyle} from "./assets/GlobalStyle";
 
 function App() {
   return (
-    <div className="App" style={{display: 'flex', width: '100%', height: '100%'}}>
+    <div style={{display: 'flex', width: '100%', height: '100%'}}>
+      <GlobalStyle/>
       <Header>
-          <Navigation />
+        <Navigation />
       </Header>
       <Main>
         <Navbar />
@@ -25,14 +27,11 @@ export default App;
 const Header = styled.header`
   top: 0;
   left: 0;
-  width: 500px;
+  width: 350px;
   height: 100%;
 `;
 
 const Main = styled.main`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   width: 100%;
   height: 100%;
   background: #f5f7fe;

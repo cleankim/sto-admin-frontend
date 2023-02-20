@@ -32,7 +32,7 @@ export default function LoginForm() {
                 <TextField id="id" label="아이디" variant="outlined" style={{width: '400px'}} onChange={e => setId(e)}/>
             </div>
             <div>
-                <TextField id="password" label="비밀번호" variant="outlined" style={{width: '400px'}} onChange={e => setPassword(e)}/>
+                <TextField type="password" id="password" label="비밀번호" variant="outlined" style={{width: '400px'}} onChange={e => setPassword(e)}/>
             </div>
             <div>
                 <Button variant="contained" style={{width: '400px'}} onClick={login}>로그인</Button>
@@ -42,6 +42,7 @@ export default function LoginForm() {
 }
 
 const LoginLayout = styled.div`
+  text-align: center;
   div {
     margin: 5px 0;
   }
