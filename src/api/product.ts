@@ -6,7 +6,8 @@ export async function selectProductList({offset, limit, productType}: ProductLis
         params: {
             offset,
             limit,
-            product_type: productType
+            product_type: productType,
+            order_type: 'latest'
         }
     }).then(res => {
         return res.data.data;

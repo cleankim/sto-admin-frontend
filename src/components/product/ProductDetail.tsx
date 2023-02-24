@@ -4,8 +4,10 @@ import styled from 'styled-components';
 import { selectProductDetail, updateProduct } from '../../api/product';
 import Product from '../../interface/Product';
 import { getDateDotFormat, getKoDateFormat } from '../../utils/date';
-import { Block, getReviewStatus } from './ProductListMain';
+import { getReviewStatus } from './ProductListMain';
 import Button from '@mui/material/Button';
+import Radio from '@mui/material/Radio';
+import {Block} from "../../assets/GlobalStyle";
 
 export default function ProductDetail() {
     const location = useLocation();
@@ -80,16 +82,22 @@ export default function ProductDetail() {
                     <section>
                         <h3>투자상품 심사</h3>
                         <div>
-                            <input type="radio" name="reviewStatus" id="approve" onChange={e => setReviewStatus('approve')} />
-                            <label htmlFor="approve">공모요청</label>
-                            <input type="radio" name="reviewStatus" id="register" onChange={e => setReviewStatus('register')}/>
-                            <label htmlFor="register">투자상품 등록</label>
-                            <input type="radio" name="reviewStatus" id="deny" onChange={e => setReviewStatus('deny')}/>
-                            <label htmlFor="deny">투자상품 등록불가</label>
+                            <div>
+                                <input type="radio" name="reviewStatus" id="approve" checked={data?.reviewStatus === 'approve' ? true : undefined} onChange={e => setReviewStatus('approve')} />
+                                <label htmlFor="approve">공모요청</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="reviewStatus" id="register" checked={data?.reviewStatus === 'register' ? true : undefined} onChange={e => setReviewStatus('register')}/>
+                                <label htmlFor="register">투자상품 등록</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="reviewStatus" id="deny" checked={data?.reviewStatus === 'deny' ? true : undefined} onChange={e => setReviewStatus('deny')}/>
+                                <label htmlFor="deny">투자상품 등록불가</label>
+                            </div>
                         </div>
                     </section>
                 </div>
-                <section style={{flexGrow: 25}}>
+                <section style={{flexGrow: 5}}>
                     <h3>특이사항</h3>
                     <div>
                         <textarea placeholder={`내용`} name="content" id="content" cols={30} rows={15} style={{width: '100%', border: '1px solid #d9d9d9'}}></textarea>

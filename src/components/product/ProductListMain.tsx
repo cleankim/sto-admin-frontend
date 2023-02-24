@@ -7,6 +7,7 @@ import Product, {ProductList, ProductListFilter } from "../../interface/Product"
 import { selectProductList } from "../../api/product";
 import moment from "moment";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import {Block, MoreButton, SearchInput} from "../../assets/GlobalStyle";
 
 export interface GridDatas<Type> {
     rows: Type[];
@@ -16,7 +17,7 @@ export interface GridDatas<Type> {
     totalCount: number;
 }
 
-function CustomPagination(props: PaginationProps) {
+export function CustomPagination(props: PaginationProps) {
     return (
         <Stack>
             <Pagination count={props.count}
@@ -89,8 +90,6 @@ export default function ProductListMain() {
         let boardList: Product[] = [];
         let {list, total_count}= await selectProductList({...listFilter});
 
-        console.log('list >> ', list);
-
         let totalCount = Number(total_count);
         if (totalCount > 0) {
             list.forEach((item: any) => {
@@ -129,9 +128,9 @@ export default function ProductListMain() {
 
     return (
         <section>
-            <h2>투자상품정보</h2>
+            <h2 style={{marginBottom: '20px', color: '#2b3675'}}>투자상품정보</h2>
             <Block>
-                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px'}}>
                     <h3 style={{textAlign: 'start', margin: 0}}>투자상품 등록</h3>
                     <div style={{display: 'flex'}}>
                         <SearchInput></SearchInput>
@@ -231,37 +230,4 @@ export const getProductStatus = (value: 'reviewing' | 'reviewed' | 'recruiting' 
     return datas[value];
 }
 
-export const Block = styled.section`
-  background: #ffffff;
-  border-radius: 10px;
-  width: 100%;
-  padding: 20px;
-  
-  h3 {
-    margin-bottom: 20px;
-  }
-`;
 
-const SearchInput = styled.input.attrs({type: 'text', placeholder: 'Search'})`
-  text-indent: 20px;
-  width: 250px;
-  height: 40px;
-  border: none;
-  background: #f5f7fe;
-  border-radius: 10px;
-  margin-right: 15px;
-`;
-
-const MoreButton = styled.button.attrs({type: 'button'})`
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  vertical-align: middle;
-  display: flex;
-  justify-content: center;
-  border: none;
-  flex-wrap: none;
-  align-items: center;
-  background: #f5f7fe;
-  color: #4319ff;
-`;

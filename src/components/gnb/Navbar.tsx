@@ -3,6 +3,8 @@ import Dashboard from '../../pages/Dashboard';
 import LoginForm from '../../pages/LoginForm';
 import MemberInfo from '../../pages/MemberInfo';
 import ProductInfo from '../../pages/ProductInfo';
+import MemberDetail from '../member/MemberDetail';
+import MemberListMain from '../member/MemberListMain';
 import ProductDetail from '../product/ProductDetail';
 import ProductListMain from '../product/ProductListMain';
 
@@ -15,7 +17,10 @@ export default function Navbar() {
                 <Route path='' element={<ProductListMain />}/>
                 <Route path='productDetail/:id' element={<ProductDetail />}/>
             </Route>
-            <Route path='/memberInfo' element={<MemberInfo />}/>
+            <Route path='/memberInfo' element={<MemberInfo />}>
+                <Route path='' element={<MemberListMain />}/>
+                <Route path='memberDetail/:id' element={<MemberDetail />}/>
+            </Route>
         </Routes>
     );
 }
