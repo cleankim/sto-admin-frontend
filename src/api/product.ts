@@ -21,11 +21,24 @@ export async function selectProductDetail(id: string) {
     });
 }
 
-export async function updateProduct({productSn, reviewStatus, productStatus}: Product) {
-    return instance.patch(`/api/v1/admin/products/${productSn}`,
+export async function updateReviewStatus({productSn, reviewStatus}: Product) {
+    return instance.patch(`/api/v1/admin/products/${productSn}/status`,
         JSON.stringify({
-            "product_status": productStatus,
-            "review_status": reviewStatus,
+            "review_status": reviewStatus
+        }),
+        {
+            headers: {'Content-type': 'application/json'}
+        })
+        .then(res => {
+        return res.data.data;
+    });
+}
+
+
+export async function updateProductStatus({productSn, productStatus}: Product) {
+    return instance.put(`/api/v1/admin/products/${productSn}`,
+        JSON.stringify({
+            "product_status": productStatus
         }),
         {
             headers: {'Content-type': 'application/json'}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import styled from 'styled-components';
-import { selectProductDetail, updateProduct } from '../../api/product';
+import { selectProductDetail, updateReviewStatus, updateProductStatus } from '../../api/product';
 import Product from '../../interface/Product';
 import { getDateDotFormat, getKoDateFormat } from '../../utils/date';
 import { getReviewStatus } from './ProductListMain';
@@ -44,8 +44,15 @@ export default function ProductDetail() {
             });
     }
 
-    const onSubmit = () => {
-        updateProduct({productSn, reviewStatus, productStatus})
+    const changeReviewStatus = () => {
+        updateReviewStatus({productSn, reviewStatus})
+            .then(res => {
+                if(res) alert('등록되었습니다.');
+            });
+    }
+
+    const changeProductStatus = () => {
+        updateProductStatus({productSn, productStatus})
             .then(res => {
                 if(res) alert('등록되었습니다.');
             });
@@ -88,27 +95,41 @@ export default function ProductDetail() {
                     <section>
                         <h3>투자상품 심사</h3>
                         <div>
-                            <RadioWrap>
-                                <input type="radio" name="reviewStatus" id="approve" defaultChecked={reviewStatus === 'approve' ? true : undefined} onChange={e => setReviewStatus('approve')} />
-                                <label htmlFor="approve">공모요청</label>
-                            </RadioWrap>
-                            <RadioWrap>
-                                <input type="radio" name="reviewStatus" id="contract" defaultChecked={reviewStatus === 'contract' ? true : undefined} onChange={e => setReviewStatus('contract')}/>
-                                <label htmlFor="contract">투자상품 등록</label>
-                            </RadioWrap>
-                            <RadioWrap>
-                                <input type="radio" name="reviewStatus" id="deny" defaultChecked={reviewStatus === 'deny' ? true : undefined} onChange={e => setReviewStatus('deny')}/>
-                                <label htmlFor="deny">투자상품 등록불가</label>
-                            </RadioWrap>
+                            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                <div>
+                                    <RadioWrap>
+                                        <input type="radio" name="reviewStatus" id="approve" defaultChecked={reviewStatus === 'approve' ? true : undefined} onChange={e => setReviewStatus('approve')} />
+                                        <label htmlFor="approve">공모요청</label>
+                                    </RadioWrap>
+                                    <RadioWrap>
+                                        <input type="radio" name="reviewStatus" id="contract" defaultChecked={reviewStatus === 'contract' ? true : undefined} onChange={e => setReviewStatus('contract')}/>
+                                        <label htmlFor="contract">투자상품 등록</label>
+                                    </RadioWrap>
+                                    <RadioWrap>
+                                        <input type="radio" name="reviewStatus" id="deny" defaultChecked={reviewStatus === 'deny' ? true : undefined} onChange={e => setReviewStatus('deny')}/>
+                                        <label htmlFor="deny">투자상품 등록불가</label>
+                                    </RadioWrap>
+                                </div>
+                                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                    <Button variant="contained" size="small" onClick={changeReviewStatus}>변경</Button>
+                                </div>
+                            </div>
                             <hr/>
-                            <RadioWrap>
-                                <input type="radio" name="productStatus" id="redeemed" defaultChecked={productStatus === 'redeemed' ? true : undefined} onChange={e => setProductStatus('redeemed')}/>
-                                <label htmlFor="redeemed">상환완료</label>
-                            </RadioWrap>
-                            <RadioWrap>
-                                <input type="radio" name="productStatus" id="payout" defaultChecked={productStatus === 'payout' ? true : undefined} onChange={e => setProductStatus('payout')}/>
-                                <label htmlFor="payout">지급완료</label>
-                            </RadioWrap>
+                            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                <div>
+                                    <RadioWrap>
+                                        <input type="radio" name="productStatus" id="recruited" defaultChecked={productStatus === 'recruited' ? true : undefined} onChange={e => setProductStatus('recruited')}/>
+                                        <label htmlFor="recruited">모집완료</label>
+                                    </RadioWrap>
+                                    <RadioWrap>
+                                        <input type="radio" name="productStatus" id="redeemed" defaultChecked={productStatus === 'redeemed' ? true : undefined} onChange={e => setProductStatus('redeemed')}/>
+                                        <label htmlFor="redeemed">상환완료</label>
+                                    </RadioWrap>
+                                </div>
+                                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                    <Button variant="contained" size="small" onClick={changeProductStatus}>변경</Button>
+                                </div>
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -119,7 +140,7 @@ export default function ProductDetail() {
                     </div>
                     <div style={{textAlign: 'center', marginTop: '20px'}}>
                         <Button variant="outlined" style={{marginRight: '10px'}}>임시저장</Button>
-                        <Button variant="contained" onClick={onSubmit}>등록</Button>
+                        <Button variant="contained">등록</Button>
                     </div>
                 </section>
             </BlockLayout>
