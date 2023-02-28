@@ -5,9 +5,9 @@ import Stack from '@mui/material/Stack';
 import {ChangeEvent, useEffect, useState} from "react";
 import Product, {ProductList, ProductListFilter } from "../../interface/Product";
 import { selectProductList } from "../../api/product";
-import moment from "moment";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import {Block, MoreButton, SearchInput} from "../../assets/GlobalStyle";
+import { getStandardDateFormat } from "../../utils/date";
 
 export interface GridDatas<Type> {
     rows: Type[];
@@ -28,11 +28,6 @@ export function CustomPagination(props: PaginationProps) {
     );
 }
 
-export const getStandardDateFormat = (param: string) => {
-    const date = new Date(param);
-    return moment(date).format('YYYY-MM-DD HH:mm:ss');
-}
-
 export default function ProductListMain() {
     const getPaginationProps = (totalCount: number, pageSize: number, onPageChange: any): PaginationProps => {
         let page = Math.floor(totalCount/pageSize);
@@ -42,11 +37,11 @@ export default function ProductListMain() {
     }
 
     const columns: GridColDef[] = [
-        {field: 'id', headerName: 'No.', width: 60 },
+        {field: 'id', headerName: 'No.', width: 50 },
         {
             field: 'productType',
             headerName: '공모요청 종류',
-            width: 100,
+            width: 120,
             renderCell: params => {
                 return params.value === 'EB' ? '전자어음' : '';
             }
@@ -54,9 +49,9 @@ export default function ProductListMain() {
         {
             field: 'productNm',
             headerName: '공모요청 명',
-            width: 160,
+            width: 200,
             renderCell: params => {
-                return <a href={`/productInfo/productDetail/${params.row.productSn}`}>{params.value}</a>;
+                return <a href={`/product/detail/${params.row.productSn}`}>{params.value}</a>;
             }
         },
         {field: 'productSn', headerName: 'productSn', hide: true },
@@ -67,13 +62,13 @@ export default function ProductListMain() {
         },
         {field: 'holderNm', headerName: '상환의무자(구매기업)', width: 140},
         {field: 'offerAmount', headerName: '상품담보금액', width: 140, renderCell: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")},
-        {field: 'investPeriod', headerName: '모집기간', width: 120},
-        {field: 'expiredDt', headerName: '만기일', width: 120},
-        {field: 'productStatus', headerName: '현재상태', width: 120,
+        {field: 'investPeriod', headerName: '모집기간', width: 80},
+        {field: 'expiredDt', headerName: '만기일', width: 180},
+        {field: 'productStatus', headerName: '현재상태', width: 90,
             renderCell: params => {
                 return getProductStatus(params.value);
             }},
-        {field: 'reviewStatus', headerName: '진행상태', width: 120,
+        {field: 'reviewStatus', headerName: '진행상태', width: 90,
             renderCell: (params: any) => {
                 return getReviewStatus(params.value);
             }}
@@ -131,7 +126,7 @@ export default function ProductListMain() {
             <h2 style={{marginBottom: '20px', color: '#2b3675'}}>투자상품정보</h2>
             <Block>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px'}}>
-                    <h3 style={{textAlign: 'start', margin: 0}}>투자상품 등록</h3>
+                    <h3 style={{textAlign: 'start', margin: 0, color: '#2b3675'}}>투자상품 등록</h3>
                     <div style={{display: 'flex'}}>
                         <SearchInput></SearchInput>
                         <MoreButton><MoreHorizIcon></MoreHorizIcon></MoreButton>
@@ -145,7 +140,6 @@ export default function ProductListMain() {
                         sx={{
                             width: '100%',
                             height: '700px',
-                            color: 'var(--text-02)',
                             marginBottom: '15px',
                             textAlign: 'center',
                             fontSize: '15px',
@@ -156,35 +150,27 @@ export default function ProductListMain() {
                             },
                             '& .MuiDataGrid-columnHeaders': {
                                 height: '40px',
-                                color: 'var(--text-01)',
-                                backgroundColor: 'var(--ui-03)',
-                                boxShadow: 'inset 0px -1px 0px var(--ui-11)',
+                                color: '#A3AED0',
                                 fontWeight: 500
                             },
                             '& .MuiDataGrid-cell': {
-                                borderBottom: '1px solid var(--ui-04)',
                                 textOverflow: 'ellipsis',
                                 overflow: 'hidden',
-                                whiteSpace: 'nowrap'
+                                whiteSpace: 'nowrap',
+                                color: '#2B3674',
+                                fontWeight: 700
                             },
                             '& .MuiDataGrid-cell a:link, a:visited': {
-                                color: 'var(--text-02)',
+                                color: '#2B3674',
                                 textDecoration: 'none'
                             },
                             '.MuiDataGrid-footerContainer': {
                                 justifyContent: 'center',
                                 borderTop: 0
                             },
-                            '.MuiPagination-ul': {
-                                color: 'var(--text-02)'
-                            },
                             '.MuiPagination-ul .Mui-selected': {
                                 backgroundColor: 'transparent',
-                                color: 'var(--primary)'
                             },
-                            '.MuiPaginationItem-icon': {
-                                color: 'var(--ui-07)'
-                            }
                         }}
                         rowsPerPageOptions={[listFilter.limit as number]}
                         pagination
@@ -216,7 +202,7 @@ export const getReviewStatus = (value: 'waiting' | 'process' | 'deny' | 'approve
     return datas[value];
 }
 
-export const getProductStatus = (value: 'reviewing' | 'reviewed' | 'recruiting' | 'recruited' | 'redeeming' | 'redeemed' | 'overdue') => {
+export const getProductStatus = (value: 'reviewing' | 'reviewed' | 'recruiting' | 'recruited' | 'redeeming' | 'redeemed' | 'overdue' | 'payout') => {
     const datas = {
         reviewing: '심사중',
         reviewed: '심사 완료',
@@ -224,7 +210,8 @@ export const getProductStatus = (value: 'reviewing' | 'reviewed' | 'recruiting' 
         recruited: '모집완료',
         redeeming: '상환중',
         redeemed: '상환완료',
-        overdue: '연체중'
+        overdue: '연체중',
+        payout: '지급완료'
     };
 
     return datas[value];

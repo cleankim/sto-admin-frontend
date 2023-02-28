@@ -2,17 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d257b290-684e-4c0c-bd0d-205116394be3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/api/member.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/member/MemberDetail.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/member/MemberListMain.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interface/Member.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/admin_logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/background.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/token.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/token/TokenDetail.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/token/TokenListMain.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface/Token.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Product.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Token.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/product.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/GlobalStyle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/GlobalStyle.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/gnb/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gnb/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gnb/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gnb/Navigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/member/MemberListMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/member/MemberListMain.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/product/ProductDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/ProductDetail.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/product/ProductListMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/ProductListMain.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MemberInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MemberInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface/Product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface/Product.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MemberInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Member.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ProductInfo.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -52,20 +64,20 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages" />
+      <recent name="$PROJECT_DIR$/public/img" />
+      <recent name="$PROJECT_DIR$/src/assets/img" />
       <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/utils" />
-      <recent name="$PROJECT_DIR$/src/interface" />
-      <recent name="$PROJECT_DIR$/src/components/gnb" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components/gnb" />
@@ -82,6 +94,7 @@
       <workItem from="1676428510632" duration="29000" />
       <workItem from="1676428926907" duration="4585000" />
       <workItem from="1676436981186" duration="24472000" />
+      <workItem from="1677466535747" duration="25702000" />
     </task>
     <task id="LOCAL-00001" summary="[sto-26] 관리자 진행중">
       <created>1676626070394</created>
@@ -97,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676885500428</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="[sto-26] 회원정보 페이지">
+      <created>1677218335103</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677218335103</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +129,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[sto-26] 관리자 진행중" />
     <MESSAGE value="[sto-26] 관리자 진행중 23.02.20" />
-    <option name="LAST_COMMIT_MESSAGE" value="[sto-26] 관리자 진행중 23.02.20" />
+    <MESSAGE value="[sto-26] 회원정보 페이지" />
+    <option name="LAST_COMMIT_MESSAGE" value="[sto-26] 회원정보 페이지" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -8,8 +8,24 @@ export default interface Product {
     expiredDt?: string;
     securityAmount?: number;
     offerAmount?: number;
+    /*  waiting: '대기중',
+        process: '심사중',
+        deny: '반려',
+        approve: '승인',
+        contract: '계약 완료',
+        register: '상품 등록'
+    * */
     reviewStatus?: 'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'contract' | 'register';
-    productStatus?: 'reviewing' | 'reviewed' | 'recruiting' | 'recruited' | 'redeeming' | 'redeemed' | 'overdue';
+    /*  reviewing: '심사중',
+        reviewed: '심사 완료',
+        recruiting: '모집중',
+        recruited: '모집완료',
+        redeeming: '상환중',
+        redeemed: '상환완료',
+        overdue: '연체중'
+        payout: '지급완료'
+    * */
+    productStatus?: 'reviewing' | 'reviewed' | 'recruiting' | 'recruited' | 'redeeming' | 'redeemed' | 'overdue' | 'payout';
     holderNm?: string;          // 발행인
     investPeriod?: number;
     productLevel?: string;

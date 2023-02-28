@@ -4,6 +4,7 @@ import { Icon } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
+import LockIcon from '@mui/icons-material/Lock';
 
 type NavStyle = {
     isActive?: boolean;
@@ -20,8 +21,9 @@ export default function Navigation() {
             </h1>
             <ul>
                 <NavItem isActive={pathname === 'dashboard'}><HomeIcon color={`primary`}></HomeIcon><a href="/dashboard">대시보드</a></NavItem>
-                <NavItem isActive={pathname === 'memberInfo'}><PersonIcon color={`primary`}></PersonIcon><a href="/memberInfo">회원정보</a></NavItem>
-                <NavItem isActive={pathname === 'productInfo'}><EqualizerIcon color={`primary`}></EqualizerIcon><a href="/productInfo">투자상품정보</a></NavItem>
+                <NavItem isActive={pathname === 'member'}><PersonIcon color={`primary`}></PersonIcon><a href="/member">회원정보</a></NavItem>
+                <NavItem isActive={pathname === 'product'}><EqualizerIcon color={`primary`}></EqualizerIcon><a href="/product">투자상품정보</a></NavItem>
+                <NavItem isActive={pathname === 'token'}><LockIcon color={`primary`}></LockIcon><a href="/token">토큰정보관리</a></NavItem>
             </ul>
         </Nav>
     );
@@ -29,6 +31,7 @@ export default function Navigation() {
 
 const Nav = styled.nav`
   display: block;
+  width: 290px;
   
   h1 {
     padding: 30px;
@@ -63,6 +66,9 @@ const NavItem = styled.li<NavStyle>`
   align-items: center;
   
   a:link, a:visited {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 30px;
     padding-left: 10px;
     color: ${({isActive}) => isActive ? '#2b3675' : '#a9b4d3'};
     text-decoration: none;

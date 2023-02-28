@@ -12,13 +12,14 @@ import {Block} from "../../assets/GlobalStyle";
 export default function ProductDetail() {
     const location = useLocation();
     const productSn = location.pathname.split('/')[3];
-    const [reviewStatus, setReviewStatus] = useState<'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'contract' | 'register'>('approve');
-
     const [data, setData] = useState<Product>();
+    const [reviewStatus, setReviewStatus] = useState<'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'contract' | 'register'>();
+    const [productStatus, setProductStatus] = useState<'reviewing' | 'reviewed' | 'recruiting' | 'recruited' | 'redeeming' | 'redeemed' | 'overdue' | 'payout'>();
+
     const getProductDetail = async (productSn: string) => {
         await selectProductDetail(productSn)
             .then(res => {
-                console.log('selectProductDetail >>> ', res);
+                console.log(res);
                 setData({
                     productSn: res.product_sn,
                     productType: res.product_type,
@@ -38,11 +39,16 @@ export default function ProductDetail() {
                     maturityDate: res.maturity_date,
                     holderNm: res.holder_nm
                 });
+                setReviewStatus(res.review_status);
+                setProductStatus(res.product_status);
             });
     }
 
     const onSubmit = () => {
-        updateProduct({productSn, reviewStatus});
+        updateProduct({productSn, reviewStatus, productStatus})
+            .then(res => {
+                if(res) alert('등록되었습니다.');
+            });
     }
 
     useEffect(() => {
@@ -82,18 +88,27 @@ export default function ProductDetail() {
                     <section>
                         <h3>투자상품 심사</h3>
                         <div>
-                            <div>
-                                <input type="radio" name="reviewStatus" id="approve" checked={data?.reviewStatus === 'approve' ? true : undefined} onChange={e => setReviewStatus('approve')} />
+                            <RadioWrap>
+                                <input type="radio" name="reviewStatus" id="approve" defaultChecked={reviewStatus === 'approve' ? true : undefined} onChange={e => setReviewStatus('approve')} />
                                 <label htmlFor="approve">공모요청</label>
-                            </div>
-                            <div>
-                                <input type="radio" name="reviewStatus" id="register" checked={data?.reviewStatus === 'register' ? true : undefined} onChange={e => setReviewStatus('register')}/>
-                                <label htmlFor="register">투자상품 등록</label>
-                            </div>
-                            <div>
-                                <input type="radio" name="reviewStatus" id="deny" checked={data?.reviewStatus === 'deny' ? true : undefined} onChange={e => setReviewStatus('deny')}/>
+                            </RadioWrap>
+                            <RadioWrap>
+                                <input type="radio" name="reviewStatus" id="contract" defaultChecked={reviewStatus === 'contract' ? true : undefined} onChange={e => setReviewStatus('contract')}/>
+                                <label htmlFor="contract">투자상품 등록</label>
+                            </RadioWrap>
+                            <RadioWrap>
+                                <input type="radio" name="reviewStatus" id="deny" defaultChecked={reviewStatus === 'deny' ? true : undefined} onChange={e => setReviewStatus('deny')}/>
                                 <label htmlFor="deny">투자상품 등록불가</label>
-                            </div>
+                            </RadioWrap>
+                            <hr/>
+                            <RadioWrap>
+                                <input type="radio" name="productStatus" id="redeemed" defaultChecked={productStatus === 'redeemed' ? true : undefined} onChange={e => setProductStatus('redeemed')}/>
+                                <label htmlFor="redeemed">상환완료</label>
+                            </RadioWrap>
+                            <RadioWrap>
+                                <input type="radio" name="productStatus" id="payout" defaultChecked={productStatus === 'payout' ? true : undefined} onChange={e => setProductStatus('payout')}/>
+                                <label htmlFor="payout">지급완료</label>
+                            </RadioWrap>
                         </div>
                     </section>
                 </div>
@@ -344,6 +359,15 @@ const ProductDetailLayout = styled.section`
   display: grid;
   gap: 20px;
   text-align: start;
+  
+  h2 {
+    font-size: 32px;
+    color: #2B3674;
+  }
+  h3 {
+    font-size: 24px;
+    color: #2B3674;
+  }
 `;
 
 const BlockLayout = styled(Block)`
@@ -379,4 +403,14 @@ const DataText= styled.span`
   font-weight: 700; 
   font-size: 18px;
   color: #2b3675;
+`;
+
+const RadioWrap = styled.div`
+  font-size: 18px;
+  font-weight: 700;
+  margin: 5px 0;
+  
+  label {
+    margin-left: 5px;
+  }
 `;

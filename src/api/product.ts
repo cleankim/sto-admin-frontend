@@ -21,12 +21,11 @@ export async function selectProductDetail(id: string) {
     });
 }
 
-export async function updateProduct({productSn, reviewStatus}: Product) {
-    console.log('productSn: ', productSn, ', reviewStatus: ', reviewStatus);
-
-    return instance.patch(`/api/v1/admin/products/${productSn}/status`,
+export async function updateProduct({productSn, reviewStatus, productStatus}: Product) {
+    return instance.patch(`/api/v1/admin/products/${productSn}`,
         JSON.stringify({
-            "review_status": reviewStatus
+            "product_status": productStatus,
+            "review_status": reviewStatus,
         }),
         {
             headers: {'Content-type': 'application/json'}

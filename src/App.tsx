@@ -6,18 +6,24 @@ import Navigation from "./components/gnb/Navigation";
 import styled from 'styled-components';
 import axios from 'axios';
 import {GlobalStyle} from "./assets/GlobalStyle";
+import { useLocation } from 'react-router';
 
 function App() {
+    const location = useLocation();
+    const pathname = location.pathname.split('/')[1];
+
   return (
-    <div style={{display: 'flex', width: '100%', height: '100%'}}>
+    <div style={{display: 'flex', width: '100%', height: '100vh'}}>
       <GlobalStyle/>
-      <Header>
-        <Navigation />
-      </Header>
+        { pathname !== '' &&
+            <Header>
+                <Navigation/>
+            </Header>
+        }
       <Main>
         <Navbar />
-        <footer></footer>
       </Main>
+      <footer></footer>
     </div>
   );
 }
@@ -35,5 +41,4 @@ const Main = styled.main`
   width: 100%;
   height: 100%;
   background: #f5f7fe;
-  padding: 20px;
 `;

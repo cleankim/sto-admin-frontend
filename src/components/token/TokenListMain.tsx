@@ -1,15 +1,25 @@
-import { CustomPagination } from "../product/ProductListMain";
+import styled from "styled-components";
+import { DataGrid, GridColDef, GridEventListener } from '@mui/x-data-grid';
+import Pagination, {PaginationProps} from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import {ChangeEvent, useEffect, useState} from "react";
+import Product, { ProductList, ProductListFilter } from "../../interface/Product";
+import { selectProductList } from "../../api/product";
 import {Block, MoreButton, SearchInput} from "../../assets/GlobalStyle";
-import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, MuiEvent } from '@mui/x-data-grid';
-import { PaginationProps } from "@mui/material";
-import { ProductListFilter } from "../../interface/Product";
-import {useEffect, useState } from "react";
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import Member, {MemberList} from "../../interface/Member";
-import { selectMemberList } from "../../api/member";
 import { getStandardDateFormat } from "../../utils/date";
 
-export default function MemberListMain() {
+export function CustomPagination(props: PaginationProps) {
+    return (
+        <Stack>
+            <Pagination count={props.count}
+                        boundaryCount={props.count}
+                        onChange={props.onChange}
+            />
+        </Stack>
+    );
+}
+
+export default function TokenListMain() {
     const getPaginationProps = (totalCount: number, pageSize: number, onPageChange: any): PaginationProps => {
         let page = Math.floor(totalCount/pageSize);
         let remainder = Number(totalCount%pageSize);
@@ -20,20 +30,14 @@ export default function MemberListMain() {
     const columns: GridColDef[] = [
         {field: 'id', headerName: 'No.', width: 60 },
         {
-            field: 'userType',
-            headerName: '투자자격',
+            field: 'productNm',
+            headerName: '투자상품명',
             width: 200,
             renderCell: params => {
-                return params.value === 'investor' ? '일반투자자' : '소득적격투자자';
+                return <a href={`/token/detail/${params.row.productSn}`}>{params.value}</a>;
             }
         },
-        {field: 'userSn', headerName: 'userSn', hide: true },
-        {field: 'userEmail', headerName: '이메일', width: 200},
-        // {field: 'offerAmount', headerName: '투자여부', width: 140, renderCell: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")},
-        // {field: 'investPeriod', headerName: '투자금(투자중)', width: 120},
-        {field: 'joinDate', headerName: '가입일', width: 200},
-        {field: 'lastPwdChanged', headerName: '마지막 접속일', width: 200},
-        // {field: 'expiredDt', headerName: '증빙서류', width: 120}
+        {field: 'productSn', hide: true },
     ];
 
     const initialState: ProductListFilter = {
@@ -41,25 +45,22 @@ export default function MemberListMain() {
         limit: 10,
         productType: 'EB'
     }
-    const [boardData, setBoardData] = useState<MemberList>({list: [], totalCount: 0});
+    const [boardData, setBoardData] = useState<ProductList>({list: [], totalCount: 0});
     const [listFilter, setListFilter] = useState<ProductListFilter>(initialState);
-    const getMemberList = async () => {
-        let boardList: Member[] = [];
-        let {list, total_count}= await selectMemberList({...listFilter});
+    const  getProductList = async () => {
+        let boardList: Product[] = [];
+        let {list, total_count}= await selectProductList({...listFilter});
 
         let totalCount = Number(total_count);
         if (totalCount > 0) {
             list.forEach((item: any) => {
                 boardList.push({
                     id: totalCount--,
-                    userSn: item.user_sn,
-                    userType: item.user_type,
-                    userEmail: item.user_email,
-                    joinDate: getStandardDateFormat(item.join_date),
-                    lastPwdChanged: getStandardDateFormat(item.last_pwd_changed)
+                    productSn: item.product_sn,
+                    productNm: item.product_nm,
                 });
             });
-            setBoardData({list: boardList, totalCount: totalCount});
+            setBoardData({list: boardList, totalCount: total_count});
         }
     }
     const [page, setPage] = useState(1);
@@ -68,28 +69,16 @@ export default function MemberListMain() {
         setPage(newPage);
     };
 
-    const onRowClick = (params: GridRowParams) => {
-        console.log(`params >>> ${params.row.userSn}`);
-        window.location.href = `/member/detail/${params.row.userSn}`;
-    }
-
     useEffect(() => {
         (async () => {
-            await getMemberList();
+            await getProductList();
         })();
     }, []);
 
     return (
         <section>
-            <h2 style={{marginBottom: '20px', color: '#2b3675'}}>회원정보</h2>
+            <h2 style={{marginBottom: '20px', color: '#2b3675'}}>토큰정보관리</h2>
             <Block>
-                {/*<div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px'}}>*/}
-                {/*    <h3 style={{textAlign: 'start', margin: 0}}>투자회원</h3>*/}
-                {/*    <div style={{display: 'flex'}}>*/}
-                {/*        <SearchInput></SearchInput>*/}
-                {/*        <MoreButton><MoreHorizIcon></MoreHorizIcon></MoreButton>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
                 <div>
                     <DataGrid
                         rows={boardData.list}
@@ -98,7 +87,6 @@ export default function MemberListMain() {
                         sx={{
                             width: '100%',
                             height: '700px',
-                            color: 'var(--text-02)',
                             marginBottom: '15px',
                             textAlign: 'center',
                             fontSize: '15px',
@@ -136,7 +124,6 @@ export default function MemberListMain() {
                         paginationMode={'server'}
                         rowCount={0}
                         keepNonExistentRowsSelected
-                        onRowClick={onRowClick}
                         components={{
                             Pagination: CustomPagination
                         }}
