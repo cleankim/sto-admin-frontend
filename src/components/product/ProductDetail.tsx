@@ -102,7 +102,7 @@ export default function ProductDetail() {
                                         <label htmlFor="approve">공모요청</label>
                                     </RadioWrap>
                                     <RadioWrap>
-                                        <input type="radio" name="reviewStatus" id="contract" defaultChecked={reviewStatus === 'contract' ? true : undefined} onChange={e => setReviewStatus('contract')}/>
+                                        <input type="radio" name="reviewStatus" id="contract" defaultChecked={reviewStatus === 'contract' || reviewStatus === 'register' ? true : undefined} onChange={e => setReviewStatus('contract')}/>
                                         <label htmlFor="contract">투자상품 등록</label>
                                     </RadioWrap>
                                     <RadioWrap>
