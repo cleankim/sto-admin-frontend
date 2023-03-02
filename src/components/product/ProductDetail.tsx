@@ -380,6 +380,7 @@ const ProductDetailLayout = styled.section`
   display: grid;
   gap: 20px;
   text-align: start;
+  height: 100%;
   
   h2 {
     font-size: 32px;

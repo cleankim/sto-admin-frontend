@@ -4,9 +4,10 @@ import Pagination, {PaginationProps} from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {ChangeEvent, useEffect, useState} from "react";
 import Product, { ProductList, ProductListFilter } from "../../interface/Product";
-import { selectProductList } from "../../api/product";
 import {Block, MoreButton, SearchInput} from "../../assets/GlobalStyle";
 import { getStandardDateFormat } from "../../utils/date";
+import { selectTokenList } from "../../api/token";
+import Token, { TokenList, TokenListFilter } from "../../interface/Token";
 
 export function CustomPagination(props: PaginationProps) {
     return (
@@ -29,38 +30,55 @@ export default function TokenListMain() {
 
     const columns: GridColDef[] = [
         {field: 'id', headerName: 'No.', width: 60 },
+        {field: 'tokenSn', hide: true },
+        {field: 'tokenStatus', headerName: '토큰상태', width: 100},
+        {field: 'tokenNm', headerName: '토큰명', width: 200,
+            renderCell: params => {
+                return <a href={`/token/detail/${params.row.tokenSn}`}>{params.value}</a>;
+            }},
         {
             field: 'productNm',
             headerName: '투자상품명',
-            width: 200,
-            renderCell: params => {
-                return <a href={`/token/detail/${params.row.productSn}`}>{params.value}</a>;
-            }
+            width: 200
         },
-        {field: 'productSn', hide: true },
+        {field: 'issueCnt', headerName: '발행개수', width: 100,
+            renderCell: params => {
+                return params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + '개';
+            }},
+        {field: 'tokenPrice', headerName: '현재 가격', width: 100,
+            renderCell: params => {
+                return params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + '원';
+            }},
+        {field: 'issueDt', headerName: '발행일', width: 200},
+        {field: 'expiredDt', headerName: '소각일', width: 200},
     ];
 
-    const initialState: ProductListFilter = {
+    const initialState: TokenListFilter = {
         offset: 0,
         limit: 10,
-        productType: 'EB'
     }
-    const [boardData, setBoardData] = useState<ProductList>({list: [], totalCount: 0});
-    const [listFilter, setListFilter] = useState<ProductListFilter>(initialState);
-    const  getProductList = async () => {
-        let boardList: Product[] = [];
-        let {list, total_count}= await selectProductList({...listFilter});
-
+    const [boardData, setBoardData] = useState<TokenList>({list: [], totalCount: 0});
+    const [listFilter, setListFilter] = useState<TokenListFilter>(initialState);
+    const getTokenList = async () => {
+        let boardList: Token[] = [];
+        let {list, total_count} = await selectTokenList({...listFilter});
+        console.log('selectTokenList >>> ', list);
         let totalCount = Number(total_count);
         if (totalCount > 0) {
             list.forEach((item: any) => {
                 boardList.push({
                     id: totalCount--,
-                    productSn: item.product_sn,
+                    tokenSn: item.token_sn,
                     productNm: item.product_nm,
+                    tokenNm: item.token_nm,
+                    issueCnt: item.issue_cnt,
+                    tokenStatus: item.token_status,
+                    tokenPrice: item.token_price,
+                    expiredDt: item.expired_dt,
+                    issueDt: item.issue_dt
                 });
             });
-            setBoardData({list: boardList, totalCount: total_count});
+            setBoardData({list: boardList, totalCount: totalCount});
         }
     }
     const [page, setPage] = useState(1);
@@ -71,7 +89,7 @@ export default function TokenListMain() {
 
     useEffect(() => {
         (async () => {
-            await getProductList();
+            await getTokenList();
         })();
     }, []);
 

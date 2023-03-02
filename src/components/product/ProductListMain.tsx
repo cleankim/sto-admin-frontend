@@ -122,7 +122,7 @@ export default function ProductListMain() {
     }, []);
 
     return (
-        <section>
+        <section style={{height: '100vh'}}>
             <h2 style={{marginBottom: '20px', color: '#2b3675'}}>투자상품정보</h2>
             <Block>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px'}}>

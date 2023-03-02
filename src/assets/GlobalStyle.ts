@@ -7,7 +7,9 @@ export const GlobalStyle = createGlobalStyle`
   button, input, select {margin:0}
   html {
     box-sizing:border-box;
-
+  }
+  html, body {
+    height: 100%;
   }
   *, :after, :before {box-sizing:inherit}
   img, video {height:auto;max-width:100%}

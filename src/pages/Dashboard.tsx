@@ -31,7 +31,7 @@ export default function Dashboard() {
     // }
 
     return (
-        <section style={{padding: '20px'}}>
+        <section style={{padding: '20px', height: '100vh'}}>
             <h2 style={{marginBottom: '54px', color: '#2b3675'}}>Main Dashboard</h2>
 
             <div style={{display: 'grid', gap: '17px'}}>

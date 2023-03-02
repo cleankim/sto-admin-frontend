@@ -1,12 +1,13 @@
 import { DataGrid, GridColDef, GridEventListener } from '@mui/x-data-grid';
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { selectProductTokenList } from "../../api/token";
+import { selectProductTokenList, selectTokenDetail } from "../../api/token";
 import Token, { TokenList, TokenListFilter } from "../../interface/Token";
 import Pagination, {PaginationProps} from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {Block, MoreButton, SearchInput} from "../../assets/GlobalStyle";
-import { getStandardDateFormat } from '../../utils/date';
+import {getDateDotFormat, getStandardDateFormat } from '../../utils/date';
+import styled from 'styled-components';
 
 export function CustomPagination(props: PaginationProps) {
     return (
@@ -19,20 +20,20 @@ export function CustomPagination(props: PaginationProps) {
     );
 }
 
-
 export default function TokenDetail() {
 
     const location = useLocation();
-    const productSn = location.pathname.split('/')[3];
+    const tokenSn = location.pathname.split('/')[3];
     const initialState: TokenListFilter = {
         offset: 0,
         limit: 10
     }
     const [boardData, setBoardData] = useState<Token[]>([]);
     const [listFilter, setListFilter] = useState<TokenListFilter>(initialState);
-    const getProductTokenList = async (productSn: string) => {
+    const getProductTokenList = async (tokenSn: string) => {
         let tokenList: Token[] = [];
-        let list = await selectProductTokenList(productSn, {...listFilter});
+        let list = await selectProductTokenList(tokenSn, {...listFilter});
+
         list.forEach((item: any) => {
             tokenList.push({
                 id: list.length--,
@@ -47,10 +48,29 @@ export default function TokenDetail() {
         });
         setBoardData(tokenList);
     }
+    const [data, setData]  = useState<Token>();
+    const getTokenDetail = async (tokenSn: string) => {
+        let result = await selectTokenDetail(tokenSn)
+            .then(res => {
+                setData({
+                    tokenSn: res.token_sn,
+                    tokenNm: res.token_nm,
+                    tokenStatus: res.token_status,
+                    productNm: res.product_nm,
+                    issueCnt: res.issue_cnt,
+                    tokenPrice: res.token_price,
+                    tradeCnt: res.trade_cnt,
+                    tradeAmount: res.trade_amount,
+                    issueDt: getDateDotFormat(res.issue_dt),
+                    expiredDt: getDateDotFormat(res.expired_dt),
+                });
+            });
+    }
 
     useEffect(() => {
         (async () => {
-            await getProductTokenList(productSn);
+            await getTokenDetail(tokenSn);
+            await getProductTokenList(tokenSn);
         })();
     }, []);
 
@@ -65,8 +85,33 @@ export default function TokenDetail() {
     ];
     
     return (
-        <section>
+        <TokenDetailLayout>
             <h2 style={{marginBottom: '20px', color: '#2b3675'}}>토큰정보관리</h2>
+            <Block>
+                <h3 style={{color: '#2b3675'}}>{data?.tokenNm}</h3>
+                <Row>
+                    <div>
+                        <p>발행</p>
+                        <span>{`${data?.issueCnt && data.issueCnt.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}개`}</span>
+                    </div>
+                    <div>
+                        <p>투자상품명</p>
+                        <span>{data?.productNm}</span>
+                    </div>
+                    <div>
+                        <p>발행가격</p>
+                        <span>{`${data?.tokenPrice && data.tokenPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`}</span>
+                    </div>
+                    <div>
+                        <p>발행일</p>
+                        <span>{data?.issueDt}</span>
+                    </div>
+                    <div>
+                        <p>소각일</p>
+                        <span>{data?.expiredDt}</span>
+                    </div>
+                </Row>
+            </Block>
             <Block>
                 <h3 style={{color: '#2b3675'}}>리스트</h3>
                 <div>
@@ -121,7 +166,31 @@ export default function TokenDetail() {
                     />
                 </div>
             </Block>
-        </section>
+        </TokenDetailLayout>
     );
     
 }
+
+const TokenDetailLayout = styled.section`
+  display: grid;
+  gap: 20px;
+`;
+
+const Row = styled.div`
+  display: flex;
+  gap: 20px;
+  text-align: center;
+  justify-content: space-evenly;
+  
+  div {
+      p {
+        color: #A3AED0;
+      }
+      span {
+        color: #2B3674;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32px;
+      }
+  }
+`;
