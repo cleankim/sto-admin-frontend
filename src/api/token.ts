@@ -11,9 +11,7 @@ export async function selectTokenList({offset, limit}: TokenListFilter) {
 }
 
 export async function selectProductTokenList(productSn: string, {offset, limit}: TokenListFilter) {
-    return instance.get(`/api/v1/admin/products/${productSn}/token`, {
-        params: {offset, limit}
-    })
+    return instance.get(`/api/v1/admin/products/${productSn}/token`)
     .then(res => {
         return res.data.data;
     });

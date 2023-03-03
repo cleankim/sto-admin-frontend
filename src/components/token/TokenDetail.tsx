@@ -33,10 +33,10 @@ export default function TokenDetail() {
     const getProductTokenList = async (tokenSn: string) => {
         let tokenList: Token[] = [];
         let list = await selectProductTokenList(tokenSn, {...listFilter});
-
+        let totalCount = list.length;
         list.forEach((item: any) => {
             tokenList.push({
-                id: list.length--,
+                id: totalCount--,
                 productSn: item.product_sn,
                 tradeSn: item.trade_sn,
                 userSn: item.user_sn,

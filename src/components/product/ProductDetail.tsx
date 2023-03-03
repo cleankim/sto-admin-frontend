@@ -97,17 +97,19 @@ export default function ProductDetail() {
                         <div>
                             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                 <div>
-                                    <RadioWrap>
-                                        <input type="radio" name="reviewStatus" id="approve" defaultChecked={reviewStatus === 'approve' ? true : undefined} onChange={e => setReviewStatus('approve')} />
-                                        <label htmlFor="approve">공모요청</label>
-                                    </RadioWrap>
+                                    <div style={{display: 'flex'}}>
+                                        <RadioWrap style={{marginRight: '30px'}}>
+                                            <input type="radio" name="reviewStatus" id="approve" defaultChecked={reviewStatus === 'approve' ? true : undefined} onChange={e => setReviewStatus('approve')} />
+                                            <label htmlFor="approve">승인</label>
+                                        </RadioWrap>
+                                        <RadioWrap>
+                                            <input type="radio" name="reviewStatus" id="deny" defaultChecked={reviewStatus === 'deny' ? true : undefined} onChange={e => setReviewStatus('deny')}/>
+                                            <label htmlFor="deny">반려</label>
+                                        </RadioWrap>
+                                    </div>
                                     <RadioWrap>
                                         <input type="radio" name="reviewStatus" id="contract" defaultChecked={reviewStatus === 'contract' || reviewStatus === 'register' ? true : undefined} onChange={e => setReviewStatus('contract')}/>
-                                        <label htmlFor="contract">투자상품 등록</label>
-                                    </RadioWrap>
-                                    <RadioWrap>
-                                        <input type="radio" name="reviewStatus" id="deny" defaultChecked={reviewStatus === 'deny' ? true : undefined} onChange={e => setReviewStatus('deny')}/>
-                                        <label htmlFor="deny">투자상품 등록불가</label>
+                                        <label htmlFor="contract">계약완료</label>
                                     </RadioWrap>
                                 </div>
                                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
