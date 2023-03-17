@@ -86,8 +86,8 @@ export default function ProductDetail() {
                                 <span><Button variant="contained" size="small">변경</Button></span>
                             </div>
                             <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                <ColumnTitle>수익률</ColumnTitle>
-                                <span>{data?.annualReturn}</span>
+                                <ColumnTitle>투자 수익률</ColumnTitle>
+                                <span>{`${data?.annualReturn}%`}</span>
                                 <Button variant="contained" size="small">변경</Button>
                             </div>
                         </div>
@@ -96,9 +96,9 @@ export default function ProductDetail() {
                         <h3>투자상품 심사</h3>
                         <div>
                             <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                <div>
-                                    <div style={{display: 'flex'}}>
-                                        <RadioWrap style={{marginRight: '30px'}}>
+                                <div style={{width: '100%'}}>
+                                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                        <RadioWrap>
                                             <input type="radio" name="reviewStatus" id="approve" defaultChecked={reviewStatus === 'approve' ? true : undefined} onChange={e => setReviewStatus('approve')} />
                                             <label htmlFor="approve">승인</label>
                                         </RadioWrap>
@@ -107,12 +107,18 @@ export default function ProductDetail() {
                                             <label htmlFor="deny">반려</label>
                                         </RadioWrap>
                                     </div>
-                                    <RadioWrap>
-                                        <input type="radio" name="reviewStatus" id="contract" defaultChecked={reviewStatus === 'contract' || reviewStatus === 'register' ? true : undefined} onChange={e => setReviewStatus('contract')}/>
-                                        <label htmlFor="contract">계약완료</label>
-                                    </RadioWrap>
+                                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                        <RadioWrap>
+                                            <input type="radio" name="reviewStatus" id="contract" defaultChecked={reviewStatus === 'contract' ? true : undefined} onChange={e => setReviewStatus('contract')}/>
+                                            <label htmlFor="contract">계약완료</label>
+                                        </RadioWrap>
+                                        <RadioWrap>
+                                            <input type="radio" name="reviewStatus" id="register" defaultChecked={reviewStatus === 'register' ? true : undefined} onChange={e => setReviewStatus('register')}/>
+                                            <label htmlFor="register">상품등록</label>
+                                        </RadioWrap>
+                                    </div>
                                 </div>
-                                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                <div style={{width: '100%', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginLeft: '20px'}}>
                                     <Button variant="contained" size="small" onClick={changeReviewStatus}>변경</Button>
                                 </div>
                             </div>
@@ -199,12 +205,12 @@ export default function ProductDetail() {
                         <span>{data?.issuerNm}</span>
                     </Row>
                     <Row>
-                        <ColumnTitle>상품담보금액</ColumnTitle>
-                        <span>{data?.offerAmount && data.offerAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span>
+                        <ColumnTitle>원리금</ColumnTitle>
+                        <span>{`${data?.offerAmount && data.offerAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`}</span>
                     </Row>
                     <Row>
-                        <ColumnTitle>할인율</ColumnTitle>
-                        <span>{`10% (메타리페 대부 5%, 메타리페 서비스 5%)`}</span>
+                        <ColumnTitle>총 할인율</ColumnTitle>
+                        <span>{`(대부 수익 3%, 투자자 수익 n%)`}</span>
                     </Row>
                     <Row>
                         <ColumnTitle>공모목적</ColumnTitle>
