@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d257b290-684e-4c0c-bd0d-205116394be3" name="Changes" comment="">
+    <list default="true" id="d257b290-684e-4c0c-bd0d-205116394be3" name="Changes" comment="상태값 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/product/ProductDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/ProductDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/product/ProductListMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/ProductListMain.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface/Product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface/Product.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="sto-51-add-status" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

@@ -13,7 +13,7 @@ export default function ProductDetail() {
     const location = useLocation();
     const productSn = location.pathname.split('/')[3];
     const [data, setData] = useState<Product>();
-    const [reviewStatus, setReviewStatus] = useState<'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'contract' | 'register'>();
+    const [reviewStatus, setReviewStatus] = useState<'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'endorse' | 'contract' | 'register'>();
     const [productStatus, setProductStatus] = useState<'reviewing' | 'reviewed' | 'recruiting' | 'recruited' | 'redeeming' | 'redeemed' | 'overdue' | 'payout'>();
 
     const getProductDetail = async (productSn: string) => {

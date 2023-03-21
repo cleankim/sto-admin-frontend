@@ -49,9 +49,9 @@ export default function ProductListMain() {
         {
             field: 'productNm',
             headerName: '공모요청 명',
-            width: 200,
+            width: 220,
             renderCell: params => {
-                return <a href={`/product/detail/${params.row.productSn}`}>{params.value}</a>;
+                return <a style={{overflow: 'hidden', textOverflow: 'ellipsis'}} href={`/product/detail/${params.row.productSn}`}>{params.value}</a>;
             }
         },
         {field: 'productSn', headerName: 'productSn', hide: true },
@@ -62,7 +62,7 @@ export default function ProductListMain() {
         },
         {field: 'holderNm', headerName: '상환의무자(구매기업)', width: 140},
         {field: 'offerAmount', headerName: '상품담보금액', width: 140, renderCell: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")},
-        {field: 'investPeriod', headerName: '모집기간', width: 80},
+        {field: 'investPeriod', headerName: '투자기간', width: 80},
         {field: 'expiredDt', headerName: '만기일', width: 180},
         {field: 'productStatus', headerName: '현재상태', width: 90,
             renderCell: params => {
@@ -188,13 +188,14 @@ export default function ProductListMain() {
 }
 
 
-export const getReviewStatus = (value: 'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'contract' | 'register') => {
+export const getReviewStatus = (value: 'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'endorse' | 'contract' | 'register') => {
     const datas = {
-        waiting: '대기중',
-        process: '심사중',
-        deny: '반려',
-        approve: '승인',
+        waiting: '심사 대기중',
+        process: '심사 중',
+        deny: '심사 반려',
+        approve: '심사 승인',
         confirm: '공모 확정',
+        endorse: '배서 완료',
         contract: '계약 완료',
         register: '상품 등록'
     };

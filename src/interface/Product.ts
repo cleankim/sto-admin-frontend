@@ -8,14 +8,16 @@ export default interface Product {
     expiredDt?: string;
     securityAmount?: number;
     offerAmount?: number;
-    /*  waiting: '대기중',
-        process: '심사중',
-        deny: '반려',
-        approve: '승인',
-        contract: '계약 완료',
-        register: '상품 등록'
+    /*  "waiting"  // 심사 대기중
+        "process"  // 심사 중
+        "deny"     // 심사 반려
+        "approve"  // 심사 승인
+        "confirm"  // 공모 확정
+        "endorse"  // 배서 완료
+        "contract" // 계약 완료
+        "register" // 상품 등록
     * */
-    reviewStatus?: 'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'contract' | 'register';
+    reviewStatus?: 'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'endorse' | 'contract' | 'register';
     /*  reviewing: '심사중',
         reviewed: '심사 완료',
         recruiting: '모집중',
