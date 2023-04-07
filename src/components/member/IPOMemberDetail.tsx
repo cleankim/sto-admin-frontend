@@ -5,11 +5,10 @@ import Button from '@mui/material/Button';
 import {Margin, Block, DataGridStyle} from "../../assets/GlobalStyle";
 import {
     selectMember,
-    selectMemberBalanceHistory,
-    selectMemberInvestHistory, selectMemberProductHistory,
-    selectMemberTokenHistory, selectMemberWithdrawHistory
+    selectMemberProductHistory,
+    selectMemberWithdrawHistory
 } from '../../api/member';
-import Member, {getMemberTypeText, MemberBalance, MemberListFilter, UserType} from '../../interface/Member';
+import Member, {getMemberTypeText, MemberBalance, MemberList, MemberListFilter, UserType} from '../../interface/Member';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -17,25 +16,24 @@ import Tabs, {TabItems} from "../common/Tabs";
 import {UserTypeContext} from "../../pages/Member";
 import Token from "../../interface/Token";
 import Product from "../../interface/Product";
-import {DataGrid, GridColDef} from "@mui/x-data-grid";
-import {ListDatas} from "../../interface/ListDatas";
 import {CustomPagination} from "../product/ProductListMain";
+import {DataGrid, GridColDef} from "@mui/x-data-grid";
 import {getStandardDateFormat} from "../../utils/date";
+import {ListDatas} from "../../interface/ListDatas";
+
+type IPOList = Product | MemberBalance;
 
 export default function MemberDetail() {
-    // 회원 타입 구분
-    const userTypeContext = useContext(UserTypeContext);
     const location = useLocation();
     const userSn = location.pathname.split('/')[3];
 
-    // 회원 정보
-    const [data, setData] = useState<Member>();
-
+    // 회원 타입 구분
+    const userTypeContext = useContext(UserTypeContext);
     const [userType, setUserType] = useState(userTypeContext.type);
 
-    const [list, setList] = useState<MemberBalance | Product | Token>();
+    // 회원 정보
+    const [data, setData] = useState<Member>();
     const getMember = async (userSn: string) => {
-        // 회원정보
         selectMember(userSn)
             .then(res => {
                 setData({
@@ -57,98 +55,60 @@ export default function MemberDetail() {
                     userType: res.user_type
                 });
             });
-    }
+    };
 
-    const TabList: TabItems[] = [
-        {name: '입출금 내역', value: 'balance'},
-        {name: '투자 내역', value: 'invest'},
-        {name: '토큰 정보', value: 'token'},
-    ];
     // 리스트
     const initialState: MemberListFilter = {
         offset: 0,
         limit: 5
     }
     const [listFilter, setListFilter] = useState<MemberListFilter>(initialState);
-    const [listType, setListType] = useState<'balance' | 'invest' | 'token'>('balance');
-    const columns: GridColDef[] =  [
-        {field: 'id', headerName: 'No.', width: 60 },
-        {
-            field: 'tradeNm',
-            headerName: '상품명',
-            width: 200
-        },
-        {field: 'balanceAmount', headerName: '금액(원)', width: 200
-            , renderCell: params => {
-                return `${params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`;
-            }},
-        {field: 'tradeType', headerName: '거래구분', width: 200},
-        {field: 'applyDt', headerName: '거래일시', width: 200
-            , renderCell: params => {
-                return getStandardDateFormat(params.value);
-            }}
+    const [listType, setListType] = useState<'withdrawal' | 'contest'>('withdrawal');
+    const columns: GridColDef[] = listType === 'withdrawal' ? WithdrawalColumns : ContestColumns;
+    const [listData, setListData] = useState<ListDatas<IPOList>>({list: [], totalCount: 0, columns: columns});
+    const TabList: TabItems[] = [
+        {name: '출금 내역', value: 'withdrawal'},
+        {name: '공모 내역', value: 'contest'},
     ];
-    const [listData, setListData] = useState<ListDatas<MemberBalance | Product | Token>>({list: [], totalCount: 0, columns: columns});
     const tabClickEvent = () => {
 
     }
-    const getHistory = async (userSn: string, type: 'balance' | 'invest' | 'token') => {
+    const getHistory = async (userSn: string, type: 'withdrawal' | 'contest') => {
         console.log('the listType in getHistory >>> ', type);
-        let boardList: MemberBalance[]  = [];
+        let boardList: IPOList[] = [];
         let totalCount = 0;
         switch(type) {
-            case "invest": {
-                let {list, total_count} = await selectMemberInvestHistory(userSn, {...listFilter});
+            case "contest": {
+                let {list, total_count} = await selectMemberProductHistory(userSn, {...listFilter});
 
-                console.log(':: selectMemberInvestHistory :: ', list);
-                //
-                // totalCount = Number(total_count);
-                // if (totalCount > 0) {
-                //     list.forEach((item: any) => {
-                //         boardList.push({
-                //             id: totalCount--,
-                //             productNm: item.product_nm,
-                //             offerAmount: item.offer_amount,
-                //             // joinDate: getStandardDateFormat(item.join_date)
-                //         });
-                //     });
-                // }
-                break;
-            }
-            case "token": {
-                let {list, total_count} = await selectMemberTokenHistory(userSn, {...listFilter});
-
-                console.log(':: selectMemberTokenHistory :: ', list);
-                //
-                // totalCount = Number(total_count);
-                // if (totalCount > 0) {
-                //     list.forEach((item: any) => {
-                //         boardList.push({
-                //             id: totalCount--,
-                //             productNm: item.product_nm,
-                //             offerAmount: item.offer_amount,
-                //             // joinDate: getStandardDateFormat(item.join_date)
-                //         });
-                //     });
-                // }
-                break;
-            }
-            default: {
-                let {list, total_count} = await selectMemberBalanceHistory(userSn, listFilter);
-
-                console.log(':: selectMemberBalanceHistory :: ', list);
+                console.log(':: selectMemberProductHistory :: ', list);
 
                 totalCount = Number(total_count);
                 if (totalCount > 0) {
                     list.forEach((item: any) => {
                         boardList.push({
                             id: totalCount--,
-                            balanceSn: item.balance_sn,
-                            balanceAmount: item.balance_amount,
-                            tradeNm: item.trade_nm,
-                            tradeType: item.trade_type,
-                            completeDt: item.complete_dt,
-                            applyDt: item.apply_dt,
+                            productNm: item.product_nm,
+                            offerAmount: item.offer_amount,
+                            // joinDate: getStandardDateFormat(item.join_date)
+                        });
+                    });
+                }
+                break;
+            }
+            default: {
+                let {list, total_count} = await selectMemberWithdrawHistory(userSn, listFilter);
+
+                console.log(':: selectMemberWithdrawHistory :: ', list);
+
+                totalCount = Number(total_count);
+                if (totalCount > 0) {
+                    list.forEach((item: any) => {
+                        boardList.push({
+                            id: totalCount--,
+                            productNm: item.product_nm,
+                            offerAmount: item.offer_amount,
+                            // joinDate: getStandardDateFormat(item.join_date)
                         });
                     });
                 }
@@ -335,9 +295,7 @@ export default function MemberDetail() {
             <Block>
                 <h3>리스트</h3>
                 <div>
-                    <Margin mb={20}>
-                        <Tabs list={TabList} func={tabClickEvent}/>
-                    </Margin>
+                    <Tabs list={TabList} func={tabClickEvent}/>
                     <DataGrid
                         rows={listData?.list}
                         columns={columns}
@@ -357,6 +315,42 @@ export default function MemberDetail() {
         </ProductDetailLayout>
     )
 };
+
+const WithdrawalColumns = [
+    {field: 'id', headerName: 'No.', width: 60 },
+    {
+        field: 'productNm',
+        headerName: '상품명',
+        width: 200
+    },
+    {field: 'offerAmount', headerName: '금액(원)', width: 200
+        , renderCell: (params: any) => {
+            return params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + '원';
+        }},
+    {field: 'joinDate', headerName: '거래구분', width: 200},
+    {field: 'lastPwdChanged', headerName: '거래일시', width: 200
+        , renderCell: (params: any) => {
+            return getStandardDateFormat(params.value);
+        }}
+];
+
+const ContestColumns = [
+    {field: 'id', headerName: 'No.', width: 60 },
+    {
+        field: 'productNm',
+        headerName: '상품명',
+        width: 200
+    },
+    {field: 'offerAmount', headerName: '금액(원)', width: 200
+        , renderCell: (params: any) => {
+            return params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + '원';
+        }},
+    {field: 'joinDate', headerName: '거래구분', width: 200},
+    {field: 'lastPwdChanged', headerName: '거래일시', width: 200
+        , renderCell: (params: any) => {
+            return getStandardDateFormat(params.value);
+        }}
+];
 
 const ProductDetailLayout = styled.section`
   display: grid;

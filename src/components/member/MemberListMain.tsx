@@ -1,15 +1,22 @@
 import { CustomPagination } from "../product/ProductListMain";
-import {Block, MoreButton, SearchInput} from "../../assets/GlobalStyle";
+import {Block, BoldText, DataGridStyle, MoreButton} from "../../assets/GlobalStyle";
 import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, MuiEvent } from '@mui/x-data-grid';
 import { PaginationProps } from "@mui/material";
 import { ProductListFilter } from "../../interface/Product";
-import {useEffect, useState } from "react";
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import Member, {MemberList} from "../../interface/Member";
+import {useContext, useEffect, useState} from "react";
+import Member, {MemberList, MemberListFilter, UserType} from "../../interface/Member";
 import { selectMemberList } from "../../api/member";
 import { getStandardDateFormat } from "../../utils/date";
+import {UserTypeContext} from "../../pages/Member";
+import SearchInput from "../common/SearchInput";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import {useNavigate} from "react-router";
 
 export default function MemberListMain() {
+
+    const userTypeContext = useContext(UserTypeContext);
+    const [userType, setUserType] = useState(userTypeContext.type);
+
     const getPaginationProps = (totalCount: number, pageSize: number, onPageChange: any): PaginationProps => {
         let page = Math.floor(totalCount/pageSize);
         let remainder = Number(totalCount%pageSize);
@@ -36,16 +43,16 @@ export default function MemberListMain() {
         // {field: 'expiredDt', headerName: '증빙서류', width: 120}
     ];
 
-    const initialState: ProductListFilter = {
+    const initialState: MemberListFilter = {
         offset: 0,
         limit: 10,
-        productType: 'EB'
+        userType: userTypeContext.type as UserType
     }
     const [boardData, setBoardData] = useState<MemberList>({list: [], totalCount: 0});
-    const [listFilter, setListFilter] = useState<ProductListFilter>(initialState);
-    const getMemberList = async () => {
+    const [listFilter, setListFilter] = useState<MemberListFilter>(initialState);
+    const getMemberList = async (type: UserType) => {
         let boardList: Member[] = [];
-        let {list, total_count}= await selectMemberList({...listFilter});
+        let {list, total_count} = await selectMemberList(({...listFilter, userType: type}));
 
         let totalCount = Number(total_count);
         if (totalCount > 0) {
@@ -68,69 +75,33 @@ export default function MemberListMain() {
         setPage(newPage);
     };
 
+    const navigate = useNavigate();
     const onRowClick = (params: GridRowParams) => {
-        console.log(`params >>> ${params.row.userSn}`);
-        window.location.href = `/member/detail/${params.row.userSn}`;
+        navigate(`/member/detail/${params.row.userSn}`);
     }
 
     useEffect(() => {
         (async () => {
-            await getMemberList();
+            await getMemberList(userTypeContext.type as UserType);
         })();
-    }, []);
+    }, [listFilter, userTypeContext.type]);
 
     return (
         <section>
-            <h2 style={{marginBottom: '20px', color: '#2b3675'}}>회원정보</h2>
             <Block>
-                {/*<div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px'}}>*/}
-                {/*    <h3 style={{textAlign: 'start', margin: 0}}>투자회원</h3>*/}
-                {/*    <div style={{display: 'flex'}}>*/}
-                {/*        <SearchInput></SearchInput>*/}
-                {/*        <MoreButton><MoreHorizIcon></MoreHorizIcon></MoreButton>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px'}}>
+                    <BoldText style={{marginBottom: 0}}>{userTypeContext.type === 'investor' ? '투자회원' : '공모회원'}</BoldText>
+                    <div style={{display: 'flex'}}>
+                        <SearchInput/>
+                        <MoreButton><MoreHorizIcon/></MoreButton>
+                    </div>
+                </div>
                 <div>
                     <DataGrid
                         rows={boardData.list}
                         columns={columns}
                         pageSize={boardData.totalCount}
-                        sx={{
-                            width: '100%',
-                            height: '700px',
-                            color: 'var(--text-02)',
-                            marginBottom: '15px',
-                            textAlign: 'center',
-                            fontSize: '15px',
-                            tableLayout: 'fixed',
-                            border: 'none',
-                            '& .MuiDataGrid-columnSeparator svg path': {
-                                display: 'none',
-                            },
-                            '& .MuiDataGrid-columnHeaders': {
-                                height: '40px',
-                                color: '#A3AED0',
-                                fontWeight: 500
-                            },
-                            '& .MuiDataGrid-cell': {
-                                textOverflow: 'ellipsis',
-                                overflow: 'hidden',
-                                whiteSpace: 'nowrap',
-                                color: '#2B3674',
-                                fontWeight: 700
-                            },
-                            '& .MuiDataGrid-cell a:link, a:visited': {
-                                color: '#2B3674',
-                                textDecoration: 'none'
-                            },
-                            '.MuiDataGrid-footerContainer': {
-                                justifyContent: 'center',
-                                borderTop: 0
-                            },
-                            '.MuiPagination-ul .Mui-selected': {
-                                backgroundColor: 'transparent',
-                            },
-                        }}
+                        sx={DataGridStyle}
                         rowsPerPageOptions={[listFilter.limit as number]}
                         pagination
                         paginationMode={'server'}

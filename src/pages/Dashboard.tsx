@@ -31,9 +31,7 @@ export default function Dashboard() {
     // }
 
     return (
-        <section style={{padding: '20px', height: '100vh'}}>
-            <h2 style={{marginBottom: '54px', color: '#2b3675'}}>Main Dashboard</h2>
-
+        <section>
             <div style={{display: 'grid', gap: '17px'}}>
                 <div>
                     <DashboardH3>투자상품 중개현황</DashboardH3>

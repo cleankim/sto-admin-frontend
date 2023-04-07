@@ -5,7 +5,7 @@ import { selectProductTokenList, selectTokenDetail } from "../../api/token";
 import Token, { TokenList, TokenListFilter } from "../../interface/Token";
 import Pagination, {PaginationProps} from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import {Block, MoreButton, SearchInput} from "../../assets/GlobalStyle";
+import {Block, MoreButton} from "../../assets/GlobalStyle";
 import {getDateDotFormat, getStandardDateFormat } from '../../utils/date';
 import styled from 'styled-components';
 
@@ -42,7 +42,7 @@ export default function TokenDetail() {
                 userSn: item.user_sn,
                 investType: item.invest_type,
                 issueToken: item.issue_token,
-                trandeAmount: item.trande_amount,
+                tradeAmount: item.trande_amount,
                 tradeDt: getStandardDateFormat(item.trade_dt),
             });
         });

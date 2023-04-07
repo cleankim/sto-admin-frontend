@@ -1,3 +1,5 @@
+import {GridColDef} from "@mui/x-data-grid";
+
 export default interface Member {
     id?: number;
     address?: string;
@@ -15,7 +17,7 @@ export default interface Member {
     userPwd?: string;
     userSn?: string;
     userState?: string;
-    userType?: 'investor' | 'ipo';
+    userType?: UserType;
 }
 
 export interface MemberList {
@@ -32,4 +34,23 @@ export interface MemberListFilter {
     userCorpYn?: 'Y' | 'N';
     startDate?: string;
     endDate?: string;
+}
+
+export const getMemberTypeText = ({userType, userCorpYn}: Member) => {
+    switch(userType) {
+        case 'investor': return userCorpYn === 'Y' ? '법인투자자' : '개인투자자';
+        case 'ipo': return userCorpYn === 'Y' ? '법인공모자' : '개인공모자';
+    }
+}
+
+export type UserType = 'investor' | 'ipo';
+
+export interface MemberBalance {
+    id?: number;
+    balanceSn?: string;
+    balanceAmount?: number;
+    tradeNm?: string;
+    tradeType?: string;
+    completeDt?: string;
+    applyDt?: string;
 }

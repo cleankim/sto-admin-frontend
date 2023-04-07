@@ -6,8 +6,9 @@ import {ChangeEvent, useEffect, useState} from "react";
 import Product, {ProductList, ProductListFilter } from "../../interface/Product";
 import { selectProductList } from "../../api/product";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import {Block, MoreButton, SearchInput} from "../../assets/GlobalStyle";
+import {Block, DataGridStyle, MoreButton} from "../../assets/GlobalStyle";
 import { getStandardDateFormat } from "../../utils/date";
+import SearchInput from "../common/SearchInput";
 
 export interface GridDatas<Type> {
     rows: Type[];
@@ -123,13 +124,12 @@ export default function ProductListMain() {
 
     return (
         <section style={{height: '100vh'}}>
-            <h2 style={{marginBottom: '20px', color: '#2b3675'}}>투자상품정보</h2>
             <Block>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px'}}>
                     <h3 style={{textAlign: 'start', margin: 0, color: '#2b3675'}}>투자상품 등록</h3>
                     <div style={{display: 'flex'}}>
-                        <SearchInput></SearchInput>
-                        <MoreButton><MoreHorizIcon></MoreHorizIcon></MoreButton>
+                        <SearchInput/>
+                        <MoreButton><MoreHorizIcon/></MoreButton>
                     </div>
                 </div>
                 <div>
@@ -137,41 +137,7 @@ export default function ProductListMain() {
                         rows={boardData.list}
                         columns={columns}
                         pageSize={boardData.totalCount}
-                        sx={{
-                            width: '100%',
-                            height: '700px',
-                            marginBottom: '15px',
-                            textAlign: 'center',
-                            fontSize: '15px',
-                            tableLayout: 'fixed',
-                            border: 'none',
-                            '& .MuiDataGrid-columnSeparator svg path': {
-                                display: 'none',
-                            },
-                            '& .MuiDataGrid-columnHeaders': {
-                                height: '40px',
-                                color: '#A3AED0',
-                                fontWeight: 500
-                            },
-                            '& .MuiDataGrid-cell': {
-                                textOverflow: 'ellipsis',
-                                overflow: 'hidden',
-                                whiteSpace: 'nowrap',
-                                color: '#2B3674',
-                                fontWeight: 700
-                            },
-                            '& .MuiDataGrid-cell a:link, a:visited': {
-                                color: '#2B3674',
-                                textDecoration: 'none'
-                            },
-                            '.MuiDataGrid-footerContainer': {
-                                justifyContent: 'center',
-                                borderTop: 0
-                            },
-                            '.MuiPagination-ul .Mui-selected': {
-                                backgroundColor: 'transparent',
-                            },
-                        }}
+                        sx={DataGridStyle}
                         rowsPerPageOptions={[listFilter.limit as number]}
                         pagination
                         paginationMode={'server'}

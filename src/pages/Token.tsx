@@ -1,7 +1,10 @@
 import {Outlet} from "react-router-dom";
+import TokenDashboard from "../components/token/TokenDashboard";
+import { Gap20Layout } from "../assets/GlobalStyle";
 
-export default function ProductInfo() {
-    return <section style={{padding: '20px', height: '100vh'}}>
+export default function Token() {
+    return <Gap20Layout>
+                <TokenDashboard/>
                <Outlet/>
-           </section>;
+           </Gap20Layout>;
 };

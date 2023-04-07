@@ -1,10 +1,10 @@
 import { useLocation } from "react-router";
 import styled from "styled-components";
-import { Icon } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import LockIcon from '@mui/icons-material/Lock';
+import {MenuItems} from "../../enum/MenuItems";
 
 type NavStyle = {
     isActive?: boolean;
@@ -20,10 +20,10 @@ export default function Navigation() {
                 <a href={`/`}>Metaripae Admin</a>
             </h1>
             <ul>
-                <NavItem isActive={pathname === 'dashboard'}><HomeIcon color={`primary`}></HomeIcon><a href="/dashboard">대시보드</a></NavItem>
-                <NavItem isActive={pathname === 'member'}><PersonIcon color={`primary`}></PersonIcon><a href="/member">회원정보</a></NavItem>
-                <NavItem isActive={pathname === 'product'}><EqualizerIcon color={`primary`}></EqualizerIcon><a href="/product">투자상품정보</a></NavItem>
-                <NavItem isActive={pathname === 'token'}><LockIcon color={`primary`}></LockIcon><a href="/token">토큰정보관리</a></NavItem>
+                <NavItem isActive={pathname === 'dashboard'}><HomeIcon color={`primary`}></HomeIcon><a href="/dashboard">{MenuItems.DASHBOARD}</a></NavItem>
+                <NavItem isActive={pathname === 'member'}><PersonIcon color={`primary`}></PersonIcon><a href="/member">{MenuItems.MEMBER}</a></NavItem>
+                <NavItem isActive={pathname === 'product'}><EqualizerIcon color={`primary`}></EqualizerIcon><a href="/product">{MenuItems.PRODUCT}</a></NavItem>
+                <NavItem isActive={pathname === 'token'}><LockIcon color={`primary`}></LockIcon><a href="/token">{MenuItems.TOKEN}</a></NavItem>
             </ul>
         </Nav>
     );

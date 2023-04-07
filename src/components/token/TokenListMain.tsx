@@ -4,10 +4,12 @@ import Pagination, {PaginationProps} from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {ChangeEvent, useEffect, useState} from "react";
 import Product, { ProductList, ProductListFilter } from "../../interface/Product";
-import {Block, MoreButton, SearchInput} from "../../assets/GlobalStyle";
-import { getStandardDateFormat } from "../../utils/date";
+import {Block, DataGridStyle, MoreButton, SubTitle} from "../../assets/GlobalStyle";
+import {getDateDotFormat, getStandardDateFormat} from "../../utils/date";
 import { selectTokenList } from "../../api/token";
 import Token, { TokenList, TokenListFilter } from "../../interface/Token";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import SearchInput from "../common/SearchInput";
 
 export function CustomPagination(props: PaginationProps) {
     return (
@@ -74,8 +76,8 @@ export default function TokenListMain() {
                     issueCnt: item.issue_cnt,
                     tokenStatus: item.token_status,
                     tokenPrice: item.token_price,
-                    expiredDt: item.expired_dt,
-                    issueDt: item.issue_dt
+                    expiredDt: getDateDotFormat(item.expired_dt),
+                    issueDt: getDateDotFormat(item.issue_dt)
                 });
             });
             setBoardData({list: boardList, totalCount: totalCount});
@@ -95,58 +97,28 @@ export default function TokenListMain() {
 
     return (
         <section>
-            <h2 style={{marginBottom: '20px', color: '#2b3675'}}>토큰정보관리</h2>
             <Block>
-                <div>
-                    <DataGrid
-                        rows={boardData.list}
-                        columns={columns}
-                        pageSize={boardData.totalCount}
-                        sx={{
-                            width: '100%',
-                            height: '700px',
-                            marginBottom: '15px',
-                            textAlign: 'center',
-                            fontSize: '15px',
-                            tableLayout: 'fixed',
-                            border: 'none',
-                            '& .MuiDataGrid-columnSeparator svg path': {
-                                display: 'none',
-                            },
-                            '& .MuiDataGrid-columnHeaders': {
-                                height: '40px',
-                                color: '#A3AED0',
-                                fontWeight: 500
-                            },
-                            '& .MuiDataGrid-cell': {
-                                textOverflow: 'ellipsis',
-                                overflow: 'hidden',
-                                whiteSpace: 'nowrap',
-                                color: '#2B3674',
-                                fontWeight: 700
-                            },
-                            '& .MuiDataGrid-cell a:link, a:visited': {
-                                color: '#2B3674',
-                                textDecoration: 'none'
-                            },
-                            '.MuiDataGrid-footerContainer': {
-                                justifyContent: 'center',
-                                borderTop: 0
-                            },
-                            '.MuiPagination-ul .Mui-selected': {
-                                backgroundColor: 'transparent',
-                            },
-                        }}
-                        rowsPerPageOptions={[listFilter.limit as number]}
-                        pagination
-                        paginationMode={'server'}
-                        rowCount={0}
-                        keepNonExistentRowsSelected
-                        components={{
-                            Pagination: CustomPagination
-                        }}
-                    />
+                <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '20px'}}>
+                    <SubTitle>토큰정보</SubTitle>
+                    <div style={{display: 'flex'}}>
+                        <SearchInput/>
+                        <MoreButton><MoreHorizIcon/></MoreButton>
+                    </div>
                 </div>
+                <DataGrid
+                    rows={boardData.list}
+                    columns={columns}
+                    pageSize={boardData.totalCount}
+                    sx={DataGridStyle}
+                    rowsPerPageOptions={[listFilter.limit as number]}
+                    pagination
+                    paginationMode={'server'}
+                    rowCount={0}
+                    keepNonExistentRowsSelected
+                    components={{
+                        Pagination: CustomPagination
+                    }}
+                />
             </Block>
         </section>
     );

@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d257b290-684e-4c0c-bd0d-205116394be3" name="Changes" comment="상태값 수정">
+    <list default="true" id="d257b290-684e-4c0c-bd0d-205116394be3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/HistoryTab.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/SearchInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/Tabs.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/member/IPOMemberDetail.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/token/TokenDashboard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/enum/MenuItems.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface/ListDatas.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/product/ProductDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/ProductDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/member.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/member.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/GlobalStyle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/GlobalStyle.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gnb/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gnb/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/gnb/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gnb/Navigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/member/MemberDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/member/MemberDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/member/MemberListMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/member/MemberListMain.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/product/ProductListMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/ProductListMain.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface/Product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface/Product.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/token/TokenDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/token/TokenDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/token/TokenListMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/token/TokenListMain.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface/Member.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface/Member.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface/Token.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface/Token.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Member.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Member.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Product.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Product.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Token.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Token.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,28 +64,32 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showModules" value="false" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/member" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.scopes" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/member" />
       <recent name="$PROJECT_DIR$/src/pages" />
       <recent name="$PROJECT_DIR$/public/img" />
       <recent name="$PROJECT_DIR$/src/assets/img" />
       <recent name="$PROJECT_DIR$/src/assets" />
-      <recent name="$PROJECT_DIR$/src/utils" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/common" />
       <recent name="$PROJECT_DIR$/src/components/gnb" />
     </key>
   </component>
@@ -77,6 +105,13 @@
       <workItem from="1676428926907" duration="4585000" />
       <workItem from="1676436981186" duration="24472000" />
       <workItem from="1677466535747" duration="26869000" />
+      <workItem from="1679534435051" duration="3000" />
+      <workItem from="1679883526082" duration="5084000" />
+      <workItem from="1679896558296" duration="761000" />
+      <workItem from="1679897335941" duration="633000" />
+      <workItem from="1679968136476" duration="50618000" />
+      <workItem from="1680583314151" duration="3000" />
+      <workItem from="1680583449384" duration="56390000" />
     </task>
     <task id="LOCAL-00001" summary="[sto-26] 관리자 진행중">
       <created>1676626070394</created>
@@ -141,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677819650605</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="- 상태 추가 endorse&#10;- 투자상품정보&#10;    - *모집기간 → 투자기간*&#10;    - *공모요청명 word break css 추가*">
+      <created>1679379783133</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679379783133</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,7 +202,8 @@
     <MESSAGE value="토큰 정보 추가 수정" />
     <MESSAGE value="투자상품 상태값 추가 변경 수정" />
     <MESSAGE value="상태값 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="상태값 수정" />
+    <MESSAGE value="- 상태 추가 endorse&#10;- 투자상품정보&#10;    - *모집기간 → 투자기간*&#10;    - *공모요청명 word break css 추가*" />
+    <option name="LAST_COMMIT_MESSAGE" value="- 상태 추가 endorse&#10;- 투자상품정보&#10;    - *모집기간 → 투자기간*&#10;    - *공모요청명 word break css 추가*" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

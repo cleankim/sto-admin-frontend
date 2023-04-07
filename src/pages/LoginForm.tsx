@@ -3,8 +3,11 @@ import {ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import { requestLogin } from "../api/login";
 import Login from "../interface/Login";
+import CryptoJS from "crypto-js";
 
 export default function LoginForm() {
+    const secretKey = process.env.REACT_APP_SECRET_KEY;
+    console.log('secretKey >> ', secretKey);
     const [loginInfo, setLoginInfo] = useState<Login>({id: 'medium', password: 'medium@1234'})
 
     const login = async () => {
@@ -22,6 +25,15 @@ export default function LoginForm() {
 
     const setPassword = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const {value} = e.target;
+
+        // 암호화
+        const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(value), secretKey as string).toString();
+        // 복호화
+        const bytes = CryptoJS.AES.decrypt(ciphertext, secretKey as string);
+        const originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+        console.log('bytes :: ', bytes, '\nciphertext :: ', ciphertext, '\noriginalText ', originalText);
+
         setLoginInfo({...loginInfo, password: value});
     }
 

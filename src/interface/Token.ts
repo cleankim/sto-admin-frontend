@@ -5,9 +5,7 @@ export default interface Token {
     userSn?: string;
     investType?: string;
     issueToken?: number;        // 토큰개수
-    trandeAmount?: bigint;      // 거래금액
     tradeDt?: string;
-
     tokenSn?: string;           // 토큰 ID
     tokenNm?: string;           // 토큰명
     tokenStatus?: string;       // 토큰상태

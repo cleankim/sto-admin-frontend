@@ -1,12 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/gnb/Navbar';
 import Navigation from "./components/gnb/Navigation";
 import styled from 'styled-components';
-import axios from 'axios';
-import {GlobalStyle} from "./assets/GlobalStyle";
+import {GlobalStyle, MenuTitle} from "./assets/GlobalStyle";
 import { useLocation } from 'react-router';
+import {getMenuItem, PathText} from "./enum/MenuItems";
 
 function App() {
     const location = useLocation();
@@ -21,9 +20,10 @@ function App() {
             </Header>
         }
       <Main>
+        <MenuTitle>{getMenuItem(pathname as PathText)}</MenuTitle>
         <Navbar />
       </Main>
-      <footer></footer>
+      <footer/>
     </div>
   );
 }
@@ -39,6 +39,8 @@ const Header = styled.header`
 
 const Main = styled.main`
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  padding: 20px;
   background: #f5f7fe;
+  overflow: scroll;
 `;

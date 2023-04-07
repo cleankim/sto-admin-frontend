@@ -21,7 +21,7 @@ export default function Navbar() {
                 <Route path='detail/:id' element={<ProductDetail />}/>
             </Route>
             <Route path='/member' element={<Member />}>
-                <Route path='' element={<MemberListMain />}/>
+                <Route path='' element={<MemberListMain/>}/>
                 <Route path='detail/:id' element={<MemberDetail />}/>
             </Route>
             <Route path='/token' element={<Token />}>
