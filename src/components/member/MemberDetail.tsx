@@ -20,7 +20,11 @@ import Product from "../../interface/Product";
 import {DataGrid, GridColDef} from "@mui/x-data-grid";
 import {ListDatas} from "../../interface/ListDatas";
 import {CustomPagination} from "../product/ProductListMain";
-import {getStandardDateFormat} from "../../utils/date";
+import {getDateFormat, getStandardDateFormat} from "../../utils/date";
+import List from "../common/List";
+import HistoryTab from "../common/HistoryTab";
+
+type SubListType = 'balance' | 'invest' | 'token';
 
 export default function MemberDetail() {
     // 회원 타입 구분
@@ -59,45 +63,27 @@ export default function MemberDetail() {
             });
     }
 
-    const TabList: TabItems[] = [
-        {name: '입출금 내역', value: 'balance'},
-        {name: '투자 내역', value: 'invest'},
-        {name: '토큰 정보', value: 'token'},
-    ];
     // 리스트
     const initialState: MemberListFilter = {
         offset: 0,
         limit: 5
     }
     const [listFilter, setListFilter] = useState<MemberListFilter>(initialState);
-    const [listType, setListType] = useState<'balance' | 'invest' | 'token'>('balance');
-    const columns: GridColDef[] =  [
-        {field: 'id', headerName: 'No.', width: 60 },
-        {
-            field: 'tradeNm',
-            headerName: '상품명',
-            width: 200
-        },
-        {field: 'balanceAmount', headerName: '금액(원)', width: 200
-            , renderCell: params => {
-                return `${params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`;
-            }},
-        {field: 'tradeType', headerName: '거래구분', width: 200},
-        {field: 'applyDt', headerName: '거래일시', width: 200
-            , renderCell: params => {
-                return getStandardDateFormat(params.value);
-            }}
-    ];
-    const [listData, setListData] = useState<ListDatas<MemberBalance | Product | Token>>({list: [], totalCount: 0, columns: columns});
-    const tabClickEvent = () => {
-
+    const [listType, setListType] = useState<SubListType>('balance');
+    const [listData, setListData] = useState<ListDatas<MemberBalance | Product | Token>>({list: [], totalCount: 0, columns: BalanceColumns});
+    const tabClickEvent = (e: React.MouseEvent) => {
+        const target = e.target as HTMLLIElement;
+        setListType(target.getAttribute('data-type') as SubListType);
     }
-    const getHistory = async (userSn: string, type: 'balance' | 'invest' | 'token') => {
+
+    const getHistory = async (userSn: string, type: SubListType) => {
         console.log('the listType in getHistory >>> ', type);
-        let boardList: MemberBalance[]  = [];
+        let boardList: unknown[] = [];
+        let columns: GridColDef[] = BalanceColumns;;
         let totalCount = 0;
         switch(type) {
             case "invest": {
+                columns = InvestColumns;
                 let {list, total_count} = await selectMemberInvestHistory(userSn, {...listFilter});
 
                 console.log(':: selectMemberInvestHistory :: ', list);
@@ -116,6 +102,7 @@ export default function MemberDetail() {
                 break;
             }
             case "token": {
+                columns = TokenColumns;
                 let {list, total_count} = await selectMemberTokenHistory(userSn, {...listFilter});
 
                 console.log(':: selectMemberTokenHistory :: ', list);
@@ -154,7 +141,7 @@ export default function MemberDetail() {
                 }
             }
         }
-        return setListData(prevState => ({...prevState, list: boardList, totalCount: totalCount}));
+        setListData((prevState: any) => ({...prevState, list: boardList, totalCount: totalCount, columns: columns}));
     }
 
     useEffect(() => {
@@ -162,7 +149,7 @@ export default function MemberDetail() {
             await getMember(userSn);
             await getHistory(userSn, listType);
         })();
-    }, []);
+    }, [listType]);
 
     return (
         <ProductDetailLayout>
@@ -332,31 +319,111 @@ export default function MemberDetail() {
                     </section>
                 </BlockColumn>
             </div>
-            <Block>
+            <HistoryTab<MemberBalance | Product | Token> tabList={TabList} columns={listData.columns} func={tabClickEvent} list={listData.list} totalCount={listData.totalCount}></HistoryTab>
+            {/*<Block>
                 <h3>리스트</h3>
                 <div>
                     <Margin mb={20}>
                         <Tabs list={TabList} func={tabClickEvent}/>
                     </Margin>
-                    <DataGrid
-                        rows={listData?.list}
-                        columns={columns}
-                        pageSize={listData?.totalCount}
-                        sx={DataGridStyle}
-                        // rowsPerPageOptions={[listFilter.limit as number]}
-                        pagination
-                        paginationMode={'server'}
-                        rowCount={0}
-                        keepNonExistentRowsSelected
-                        components={{
-                            Pagination: CustomPagination
-                        }}
-                    />
+                    <List columns={columns} totalCount={listData?.totalCount} list={listData?.list} />
                 </div>
-            </Block>
+            </Block>*/}
         </ProductDetailLayout>
     )
 };
+
+const TabList: TabItems[] = [
+    {name: '입출금 내역', value: 'balance'},
+    {name: '투자 내역', value: 'invest'},
+    {name: '토큰 정보', value: 'token'},
+];
+
+const columns: GridColDef[] =  [
+    {field: 'id', headerName: 'No.', width: 60 },
+    {
+        field: 'tradeNm',
+        headerName: '상품명',
+        width: 200
+    },
+    {field: 'balanceAmount', headerName: '금액(원)', width: 200
+        , renderCell: params => {
+            return `${params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`;
+        }},
+    {field: 'tradeType', headerName: '거래구분', width: 200},
+    {field: 'applyDt', headerName: '거래일시', width: 200
+        , renderCell: params => {
+            return getStandardDateFormat(params.value);
+        }}
+];
+
+const BalanceColumns: GridColDef[] = [
+    {field: 'id', headerName: 'No.', width: 60 },
+    {field: 'tradeNm', headerName: '상품명', width: 200},
+    {field: 'balanceAmount', headerName: '금액(원)', width: 100
+        , renderCell: params => {
+            return `${params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`;
+        }},
+    {field: 'tradeType', headerName: '거래구분', width: 100},
+    {field: 'applyDt', headerName: '거래일시', width: 200
+        , renderCell: params => {
+            return getStandardDateFormat(params.value);
+        }}
+];
+
+const InvestColumns: GridColDef[] =  [
+    {field: 'id', headerName: 'No.', width: 60 },
+    {field: 'productNm', headerName: '상품명', width: 200},
+    {field: 'productLevel', headerName: '상품등급', width: 60},
+    {field: 'annualReturn', headerName: '수익률(연)', width: 70
+        , renderCell: params => {
+            return `${params.value}%`;
+        }},
+    {field: 'offerAmount', headerName: '투자금액(원)', width: 100
+        , renderCell: params => {
+            return `${params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`;
+        }},
+    {field: 'returnExpect', headerName: '예상수익(세전)', width: 100
+        , renderCell: params => {
+            return `${params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`;
+        }},
+    {field: 'offerStartDate', headerName: '투자실행일', width: 100
+        , renderCell: params => {
+            return getDateFormat(params.value);
+        }},
+    {field: 'expiredDt', headerName: '상품만기일', width: 100
+        , renderCell: params => {
+            return getDateFormat(params.value);
+        }},
+    {field: 'productStatus', headerName: '현재상태', width: 100},
+    {field: 'applyDt', headerName: '투자일자', width: 200
+        , renderCell: params => {
+            return getStandardDateFormat(params.value);
+        }}
+];
+
+const TokenColumns: GridColDef[] =  [
+    {field: 'id', headerName: 'No.', width: 60 },
+    {
+        field: 'tokenSn',
+        headerName: '주소',
+        width: 200
+    },
+    {field: 'productSn', headerName: 'productSn', hide: true},
+    {field: 'tokenNm', headerName: '토큰명', width: 200
+        , renderCell: params => {
+            return <a href={`/product/detail/${params.row.productSn}`}>{params.value}</a>;
+        }},
+    {field: 'productNm', headerName: '투자상품명', width: 200},
+    {field: 'issueCnt', headerName: '토큰개수', width: 200
+        , renderCell: params => {
+            return  `${params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}개`;
+        }},
+    {field: 'issueDt', headerName: '최종 거래일', width: 200
+        , renderCell: params => {
+            return getStandardDateFormat(params.value);
+        }}
+];
 
 const ProductDetailLayout = styled.section`
   display: grid;

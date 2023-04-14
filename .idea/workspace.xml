@@ -2,34 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d257b290-684e-4c0c-bd0d-205116394be3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/HistoryTab.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/SearchInput.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/Tabs.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/member/IPOMemberDetail.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/token/TokenDashboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/enum/MenuItems.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interface/ListDatas.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/board.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/List.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customerService/Board.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customerService/BoardDetail.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customerService/BoardListView.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/customerService/CreateBoard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface/Board.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/CustomerService.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/member.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/member.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/GlobalStyle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/GlobalStyle.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/HistoryTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/HistoryTab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/Tabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/Tabs.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/gnb/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gnb/Navbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/gnb/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/gnb/Navigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/member/IPOMemberDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/member/IPOMemberDetail.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/member/MemberDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/member/MemberDetail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/member/MemberListMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/member/MemberListMain.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/product/ProductListMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/ProductListMain.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/token/TokenDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/token/TokenDetail.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/token/TokenListMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/token/TokenListMain.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface/Member.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface/Member.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface/Token.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface/Token.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/enum/MenuItems.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/enum/MenuItems.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface/ListDatas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface/ListDatas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface/Product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface/Product.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Member.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Member.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Product.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Product.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Token.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Token.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +65,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/member" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/customerService" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -82,11 +77,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/customerService" />
       <recent name="$PROJECT_DIR$/src/components/member" />
       <recent name="$PROJECT_DIR$/src/pages" />
       <recent name="$PROJECT_DIR$/public/img" />
       <recent name="$PROJECT_DIR$/src/assets/img" />
-      <recent name="$PROJECT_DIR$/src/assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components/common" />
@@ -111,7 +106,7 @@
       <workItem from="1679897335941" duration="633000" />
       <workItem from="1679968136476" duration="50618000" />
       <workItem from="1680583314151" duration="3000" />
-      <workItem from="1680583449384" duration="56390000" />
+      <workItem from="1680583449384" duration="118633000" />
     </task>
     <task id="LOCAL-00001" summary="[sto-26] 관리자 진행중">
       <created>1676626070394</created>
@@ -183,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679379783133</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="어드민 추가사항 진행중">
+      <created>1680854008700</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1680854008700</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +205,8 @@
     <MESSAGE value="투자상품 상태값 추가 변경 수정" />
     <MESSAGE value="상태값 수정" />
     <MESSAGE value="- 상태 추가 endorse&#10;- 투자상품정보&#10;    - *모집기간 → 투자기간*&#10;    - *공모요청명 word break css 추가*" />
-    <option name="LAST_COMMIT_MESSAGE" value="- 상태 추가 endorse&#10;- 투자상품정보&#10;    - *모집기간 → 투자기간*&#10;    - *공모요청명 word break css 추가*" />
+    <MESSAGE value="어드민 추가사항 진행중" />
+    <option name="LAST_COMMIT_MESSAGE" value="어드민 추가사항 진행중" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

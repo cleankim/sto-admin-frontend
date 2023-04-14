@@ -10,6 +10,10 @@ import ProductDetail from '../product/ProductDetail';
 import ProductListMain from '../product/ProductListMain';
 import TokenDetail from '../token/TokenDetail';
 import TokenListMain from '../token/TokenListMain';
+import CustomerService from "../../pages/CustomerService";
+import BoardListView from "../customerService/BoardListView";
+import BoardDetail from "../customerService/BoardDetail";
+import CreateBoard from "../customerService/CreateBoard";
 
 export default function Navbar() {
     return (
@@ -27,6 +31,11 @@ export default function Navbar() {
             <Route path='/token' element={<Token />}>
                 <Route path='' element={<TokenListMain />}/>
                 <Route path='detail/:id' element={<TokenDetail />}/>
+            </Route>
+            <Route path='/customerService' element={<CustomerService />}>
+                <Route path='' element={<BoardListView />} />
+                <Route path='detail/:id' element={<BoardDetail />} />
+                <Route path='create' element={<CreateBoard />} />
             </Route>
         </Routes>
     );

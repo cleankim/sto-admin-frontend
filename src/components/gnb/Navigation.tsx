@@ -4,6 +4,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import LockIcon from '@mui/icons-material/Lock';
+import NoteIcon from '@mui/icons-material/Note';
 import {MenuItems} from "../../enum/MenuItems";
 
 type NavStyle = {
@@ -24,6 +25,7 @@ export default function Navigation() {
                 <NavItem isActive={pathname === 'member'}><PersonIcon color={`primary`}></PersonIcon><a href="/member">{MenuItems.MEMBER}</a></NavItem>
                 <NavItem isActive={pathname === 'product'}><EqualizerIcon color={`primary`}></EqualizerIcon><a href="/product">{MenuItems.PRODUCT}</a></NavItem>
                 <NavItem isActive={pathname === 'token'}><LockIcon color={`primary`}></LockIcon><a href="/token">{MenuItems.TOKEN}</a></NavItem>
+                <NavItem isActive={pathname === 'customerService'}><NoteIcon color={`primary`}></NoteIcon><a href="/customerService">{MenuItems.CUSTOMER_SERVICE}</a></NavItem>
             </ul>
         </Nav>
     );

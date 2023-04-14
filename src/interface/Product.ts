@@ -30,11 +30,12 @@ export default interface Product {
     productStatus?: 'reviewing' | 'reviewed' | 'recruiting' | 'recruited' | 'redeeming' | 'redeemed' | 'overdue' | 'payout';
     holderNm?: string;          // 발행인
     investPeriod?: number;
-    productLevel?: string;
+    productLevel?: string;      // 상품등급
     annualReturn?: number;      // 수익률
     offerStartDate?: string;    // 모집 시작일
     offerEndDate?: string;      // 모집 마지막일
     maturityDate?: string;      // 상환일
+    returnExpect?: number;      // 예상수익
 }
 
 export interface ProductList {

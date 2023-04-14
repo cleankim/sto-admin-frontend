@@ -64,6 +64,13 @@ export const GlobalStyle = createGlobalStyle`
     background-color: transparent !important;
     color: #4690FF;
   }
+
+  .ck-editor {
+    margin-bottom: 10px !important;
+  }
+  .ck-content {
+    height: 400px !important;
+  }
 `;
 
 export const Margin = styled.div<Partial<MarginProps>>`
@@ -146,4 +153,69 @@ export const BoldText = styled.h3`
   color: #2B3674;
   font-weight: 700;
   font-size: 24px;
+`;
+
+export const InputTextWithButton = styled.input.attrs({
+    type: 'text'
+})`
+    width: 100%;
+    border: none;
+    z-index: 1;
+    text-indent: 15px;
+    font-size: 15px;
+    background: transparent;
+    
+    &:focus {
+      outline: none;
+    }
+`;
+
+export const InputFileWithButton = styled.input.attrs({
+    type: 'file'
+})`
+  display: none;
+  appearance: none;
+`;
+
+export const FileLabelButton = styled.label`
+  height: 45px;
+  font-size: 15px;
+  line-height: 18px;
+  z-index: 1;
+  color: var(--text-02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ui-background);
+  cursor: pointer;
+`;
+
+export const SubText = styled.div`
+  font-weight: 500;
+  font-size: 14px;
+  color: #A3AED0;
+`;
+
+export const BlueButton = styled.div`
+  width: 82px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  /* basic colour */
+
+  background: #4676FB;
+  /* Shadow */
+
+  box-shadow: 1px 2px 3px rgba(70, 118, 251, 0.41);
+  border-radius: 5px;
+`;
+
+export const CSButtonLayout = styled.div`
+  display: flex; 
+  gap: 20px; 
+  justify-content: center;
+  margin-top: 50px;
 `;

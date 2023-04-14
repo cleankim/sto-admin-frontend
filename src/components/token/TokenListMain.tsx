@@ -32,7 +32,7 @@ export default function TokenListMain() {
 
     const columns: GridColDef[] = [
         {field: 'id', headerName: 'No.', width: 60 },
-        {field: 'tokenSn', hide: true },
+        {field: 'tokenSn', headerName: 'tokenSn', hide: true },
         {field: 'tokenStatus', headerName: '토큰상태', width: 100},
         {field: 'tokenNm', headerName: '토큰명', width: 200,
             renderCell: params => {

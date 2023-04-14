@@ -8,7 +8,7 @@ export interface TabItems {
 }
 
 export type TabProps = {
-    list: TabItems[];
+    tabList: TabItems[];
     func: (param: any) => void;
 }
 
@@ -16,7 +16,7 @@ export type ActiveTabProps = {
     active: boolean;
 }
 
-export default function Tabs({list, func}: TabProps) {
+export default function Tabs({tabList, func}: TabProps) {
 
     const [activeTab, setActiveTab] = useState(0);
 
@@ -30,7 +30,7 @@ export default function Tabs({list, func}: TabProps) {
 
     return (
         <TabList>
-            {list.map((item, i) => {
+            {tabList.map((item, i) => {
                 return <TabItem key={i} onClick={e => clickHandler(e)} data-type={item.value} value={i} active={activeTab === i}>{item.name}</TabItem>;
             })}
         </TabList>

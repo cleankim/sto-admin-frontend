@@ -295,7 +295,7 @@ export default function MemberDetail() {
             <Block>
                 <h3>리스트</h3>
                 <div>
-                    <Tabs list={TabList} func={tabClickEvent}/>
+                    <Tabs tabList={TabList} func={tabClickEvent}/>
                     <DataGrid
                         rows={listData?.list}
                         columns={columns}
