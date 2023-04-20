@@ -18,7 +18,7 @@ export default function Navigation() {
     return (
         <Nav>
             <h1>
-                <a href={`/`}>Metaripae Admin</a>
+                <a href={`/`}>STO Platform Admin</a>
             </h1>
             <ul>
                 <NavItem isActive={pathname === 'dashboard'}><HomeIcon color={`primary`}></HomeIcon><a href="/dashboard">{MenuItems.DASHBOARD}</a></NavItem>
@@ -45,7 +45,7 @@ const Nav = styled.nav`
       color: #2b3675;
       text-decoration: none;
       font-weight: 700;
-      font-size: 26px;
+      font-size: 24px;
     }
   }
   

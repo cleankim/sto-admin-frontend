@@ -62,7 +62,7 @@ export default function ProductListMain() {
             width: 160
         },
         {field: 'holderNm', headerName: '상환의무자(구매기업)', width: 140},
-        {field: 'offerAmount', headerName: '상품담보금액', width: 140, renderCell: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")},
+        {field: 'offerAmount', headerName: '상품담보금액', width: 140, renderCell: params => `${params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`},
         {field: 'investPeriod', headerName: '투자기간', width: 80},
         {field: 'expiredDt', headerName: '만기일', width: 180},
         {field: 'productStatus', headerName: '현재상태', width: 90,

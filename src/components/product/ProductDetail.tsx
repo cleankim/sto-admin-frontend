@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import styled from 'styled-components';
 import { selectProductDetail, updateReviewStatus, updateProductStatus } from '../../api/product';
-import Product from '../../interface/Product';
+import Product, {ReviewStatus} from '../../interface/Product';
 import { getDateDotFormat, getKoDateFormat } from '../../utils/date';
 import { getReviewStatus } from './ProductListMain';
 import Button from '@mui/material/Button';
@@ -13,7 +13,7 @@ export default function ProductDetail() {
     const location = useLocation();
     const productSn = location.pathname.split('/')[3];
     const [data, setData] = useState<Product>();
-    const [reviewStatus, setReviewStatus] = useState<'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'endorse' | 'contract' | 'register'>();
+    const [reviewStatus, setReviewStatus] = useState<ReviewStatus>();
     const [productStatus, setProductStatus] = useState<'reviewing' | 'reviewed' | 'recruiting' | 'recruited' | 'redeeming' | 'redeemed' | 'overdue' | 'payout'>();
 
     const getProductDetail = async (productSn: string) => {
@@ -44,6 +44,16 @@ export default function ProductDetail() {
             });
     }
 
+    const reviewStatusClickEvent = (e: React.MouseEvent) => {
+        if (e.currentTarget) {
+            const reviewStatus = e.currentTarget.getAttribute('value') as ReviewStatus;
+            updateReviewStatus({productSn, reviewStatus})
+                .then(res => {
+                    if(res) alert(getModalText(reviewStatus));
+                });
+        }
+    }
+
     const changeReviewStatus = () => {
         updateReviewStatus({productSn, reviewStatus})
             .then(res => {
@@ -70,7 +80,7 @@ export default function ProductDetail() {
             <BlockLayout>
                 <div style={{flexGrow: 1, marginRight: '50px'}}>
                     <section style={{marginBottom: '10px'}}>
-                        <h3>투자상품 심사</h3>
+                        <h3>투자상품 진행상태</h3>
                         <div style={{display: 'grid', gap: '10px'}}>
                             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                 <ColumnTitle>공모명</ColumnTitle>
@@ -98,6 +108,9 @@ export default function ProductDetail() {
                             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                 <div style={{width: '100%'}}>
                                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
+
+                                        <Button variant="contained" size="small" value={`approve`} onClick={e => reviewStatusClickEvent(e)}>승인</Button>
+
                                         <RadioWrap>
                                             <input type="radio" name="reviewStatus" id="approve" defaultChecked={reviewStatus === 'approve' ? true : undefined} onChange={e => setReviewStatus('approve')} />
                                             <label htmlFor="approve">승인</label>
@@ -110,7 +123,7 @@ export default function ProductDetail() {
                                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                         <RadioWrap>
                                             <input type="radio" name="reviewStatus" id="contract" defaultChecked={reviewStatus === 'contract' ? true : undefined} onChange={e => setReviewStatus('contract')}/>
-                                            <label htmlFor="contract">계약완료</label>
+                                            <label htmlFor="contract">배서완료</label>
                                         </RadioWrap>
                                         <RadioWrap>
                                             <input type="radio" name="reviewStatus" id="register" defaultChecked={reviewStatus === 'register' ? true : undefined} onChange={e => setReviewStatus('register')}/>
@@ -161,15 +174,15 @@ export default function ProductDetail() {
                     </Column>
                     <Column>
                         <ColumnTitle>발행인</ColumnTitle>
-                        <DataText>{data?.holderNm}</DataText>
-                    </Column>
-                    <Column>
-                        <ColumnTitle>소지인</ColumnTitle>
                         <DataText>{data?.issuerNm}</DataText>
                     </Column>
                     <Column>
+                        <ColumnTitle>소지인</ColumnTitle>
+                        <DataText>{data?.holderNm}</DataText>
+                    </Column>
+                    <Column>
                         <ColumnTitle>상품담보금액</ColumnTitle>
-                        <DataText>{data?.offerAmount && data.offerAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</DataText>
+                        <DataText>{`${data?.offerAmount && data.offerAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원`}</DataText>
                     </Column>
                     <Column>
                         <ColumnTitle>모집기간</ColumnTitle>
@@ -185,7 +198,7 @@ export default function ProductDetail() {
                     </Column>
                     <Column>
                         <ColumnTitle>상태</ColumnTitle>
-                        <DataText>{}</DataText>
+                        <DataText>{getReviewStatus(data?.reviewStatus as ReviewStatus)}</DataText>
                     </Column>
                 </div>
             </Block>
@@ -194,7 +207,7 @@ export default function ProductDetail() {
                 <div style={{display: 'grid', gap: '10px'}}>
                     <Row>
                         <ColumnTitle>발행인</ColumnTitle>
-                        <span>{data?.holderNm}</span>
+                        <span>{data?.issuerNm}</span>
                     </Row>
                     <Row>
                         <ColumnTitle>신용등급</ColumnTitle>
@@ -202,7 +215,7 @@ export default function ProductDetail() {
                     </Row>
                     <Row>
                         <ColumnTitle>소지인</ColumnTitle>
-                        <span>{data?.issuerNm}</span>
+                        <span>{data?.holderNm}</span>
                     </Row>
                     <Row>
                         <ColumnTitle>원리금</ColumnTitle>
@@ -236,11 +249,11 @@ export default function ProductDetail() {
                     <div style={{display: 'grid', gap: '10px'}}>
                         <Row>
                             <ColumnTitle>기업명</ColumnTitle>
-                            <span>{`${data?.holderNm} | 정윤석 | 134-81-25389`}</span>
+                            <span>{`${data?.issuerNm} | 구자윤 | 437-87-00988`}</span>
                         </Row>
                         <Row>
                             <ColumnTitle>주소</ColumnTitle>
-                            <span>충남 천안시 서북구 입장면 연곡길 308</span>
+                            <span>서울특별시 강남구 언주로 136길 26</span>
                         </Row>
                         <Row>
                             <ColumnTitle>기업규모</ColumnTitle>
@@ -311,11 +324,11 @@ export default function ProductDetail() {
                     <div style={{display: 'grid', gap: '10px'}}>
                         <Row>
                             <ColumnTitle>기업명</ColumnTitle>
-                            <span>{`${data?.issuerNm} | 홍길동 | 123-23-34567`}</span>
+                            <span>{`${data?.holderNm} | 이민석 | 721-86-00230`}</span>
                         </Row>
                         <Row>
                             <ColumnTitle>주소</ColumnTitle>
-                            <span>서울 강남구 논현동 88-9</span>
+                            <span>경기 광명시 새빛공원로 67 자이타워 A동 25층</span>
                         </Row>
                         <Row>
                             <ColumnTitle>기업규모</ColumnTitle>
@@ -383,6 +396,27 @@ export default function ProductDetail() {
         </ProductDetailLayout>
     )
 };
+
+
+const getModalText = (value: string) => {
+    switch(value) {
+        case "approve": return ModalText['approve'];
+        case "deny": return ModalText['deny'];
+        case "contract": return ModalText['contract'];
+        case "register": return ModalText['register'];
+        case "recruited": return ModalText['recruited'];
+        case "redeemed": return ModalText['redeemed'];
+    }
+}
+
+const ModalText = {
+    approve: '신청된 어음에 대한 공모가 승인되었습니다.',
+    deny: '신청된 어음에 대한 공모가 반려되었습니다.',
+    contract: '전자계약 체결 및 전자어음 배서가 완료되었습니다. \n예탁결제원의 토큰증권 등록 프로세스를 진행합니다.',
+    register: '투자상품 등록 및 토큰 발행이 완료되었습니다. \n투자하기 메뉴에서 확인해 주세요.',
+    recruited: '등록하신 투자상품의 투자금액 모집이 완료되었습니다. \n토큰을 분배합니다.',
+    redeemed: '전자어음의 상환이 완료되었습니다. \n투자자가 보유하고 있는 토큰을 회수하고 투자금 및 수익금을 분배합니다.'
+}
 
 const ProductDetailLayout = styled.section`
   display: grid;

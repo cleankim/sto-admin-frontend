@@ -64,30 +64,30 @@ export default function Dashboard() {
                 </div>
 
                 <div>
-                    <DashboardH3>메타리페 수익</DashboardH3>
+                    <DashboardH3>STO 플랫폼 수익</DashboardH3>
                     <Row>
                         <BlockS>
-                            <p>메타리페 대부(연간)</p>
+                            <p>STO 플랫폼 대부(연간)</p>
                             <span>500,740,000원</span>
                         </BlockS>
                         <BlockS>
-                            <p>메타리페 대부(월간)</p>
+                            <p>STO 플랫폼 대부(월간)</p>
                             <span>36,550,200원</span>
                         </BlockS>
                         <BlockS>
-                            <p>메타리페 대부(일일)</p>
+                            <p>STO 플랫폼 대부(일일)</p>
                             <span>1,120,800원</span>
                         </BlockS>
                         <BlockS>
-                            <p>메타리페 플랫폼(연간)</p>
+                            <p>STO 플랫폼 플랫폼(연간)</p>
                             <span>100,180,000원</span>
                         </BlockS>
                         <BlockS>
-                            <p>메타리페 플랫폼(월간)</p>
+                            <p>STO 플랫폼 플랫폼(월간)</p>
                             <span>7,250,080원</span>
                         </BlockS>
                         <BlockS>
-                            <p>메타리페 플랫폼(일일)</p>
+                            <p>STO 플랫폼 플랫폼(일일)</p>
                             <span>330,500원</span>
                         </BlockS>
                     </Row>

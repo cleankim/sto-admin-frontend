@@ -18,7 +18,7 @@ import CreateBoard from "../customerService/CreateBoard";
 export default function Navbar() {
     return (
         <Routes>
-            <Route path='/' element={<LoginForm />}/>
+            {/*<Route path='/' element={<LoginForm />}/>*/}
             <Route path='/dashboard' element={<Dashboard />}/>
             <Route path='/product' element={<Product />}>
                 <Route path='' element={<ProductListMain />}/>

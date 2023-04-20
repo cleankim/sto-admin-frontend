@@ -50,7 +50,7 @@ export default function TokenDetail() {
     }
     const [data, setData]  = useState<Token>();
     const getTokenDetail = async (tokenSn: string) => {
-        let result = await selectTokenDetail(tokenSn)
+        await selectTokenDetail(tokenSn)
             .then(res => {
                 setData({
                     tokenSn: res.token_sn,
@@ -92,7 +92,7 @@ export default function TokenDetail() {
                 <Row>
                     <div>
                         <p>발행</p>
-                        <span>{`${data?.issueCnt && data.issueCnt.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}개`}</span>
+                        <span>{`${data?.issueCnt && data?.tokenPrice && (Number(data.issueCnt/data.tokenPrice)).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}개`}</span>
                     </div>
                     <div>
                         <p>투자상품명</p>

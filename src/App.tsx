@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import {GlobalStyle, MenuTitle} from "./assets/GlobalStyle";
 import { useLocation } from 'react-router';
 import {getMenuItem, PathText} from "./enum/MenuItems";
+import LoginForm from "./pages/LoginForm";
 
 function App() {
     const location = useLocation();
@@ -14,15 +15,20 @@ function App() {
   return (
     <div style={{display: 'flex', width: '100%', height: '100%'}}>
       <GlobalStyle/>
-        { pathname !== '' &&
-            <Header>
-                <Navigation/>
-            </Header>
-        }
-      <Main>
-        <MenuTitle>{getMenuItem(pathname as PathText)}</MenuTitle>
-        <Navbar />
-      </Main>
+          {
+              pathname !== '' ?
+              <>
+                <Header>
+                  <Navigation/>
+                </Header>
+                <Main>
+                    <MenuTitle>{getMenuItem(pathname as PathText)}</MenuTitle>
+                    <Navbar />
+                </Main>
+              </>
+                  :
+              <LoginForm />
+          }
       <footer/>
     </div>
   );

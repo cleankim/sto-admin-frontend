@@ -55,10 +55,9 @@ export default function LoginForm() {
             </LoginLayout>
             <MainLayout>
                 <AdminLogo/>
-                <h1 style={{fontSize: '42px'}}>메타리페 Admin</h1>
+                <h1 style={{fontSize: '42px'}}>STO Platform Admin</h1>
                 <MainTextLayout>
-                    <p>무결점 전자어음 투자, 메타리페와 함께 </p>
-                    <p style={{fontSize: '29px', lineHeight: '45px'}}>metaripae.com</p>
+                    <p>무결점 전자어음 투자, STO 플랫폼과 함께 </p>
                 </MainTextLayout>
             </MainLayout>
         </LoginFormLayout>
@@ -67,6 +66,8 @@ export default function LoginForm() {
 
 
 const LoginFormLayout = styled.div`
+  width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

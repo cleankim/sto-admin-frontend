@@ -1,4 +1,4 @@
-import Product, { ProductListFilter } from "../interface/Product";
+import Product, {ProductListFilter, ReviewStatus} from "../interface/Product";
 import instance from "./axios";
 
 export async function selectProductList({offset, limit, productType}: ProductListFilter) {

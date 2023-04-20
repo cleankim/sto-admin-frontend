@@ -17,7 +17,7 @@ export default interface Product {
         "contract" // 계약 완료
         "register" // 상품 등록
     * */
-    reviewStatus?: 'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'endorse' | 'contract' | 'register';
+    reviewStatus?: ReviewStatus;
     /*  reviewing: '심사중',
         reviewed: '심사 완료',
         recruiting: '모집중',
@@ -37,6 +37,8 @@ export default interface Product {
     maturityDate?: string;      // 상환일
     returnExpect?: number;      // 예상수익
 }
+
+export type ReviewStatus = 'waiting' | 'process' | 'deny' | 'approve' | 'confirm' | 'endorse' | 'contract' | 'register';
 
 export interface ProductList {
     list: Product[];
