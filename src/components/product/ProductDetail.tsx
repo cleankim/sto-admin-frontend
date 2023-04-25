@@ -78,7 +78,7 @@ export default function ProductDetail() {
         <ProductDetailLayout>
             <h2>투자상품정보 - 투자상품 등록</h2>
             <BlockLayout>
-                <div style={{flexGrow: 1, marginRight: '50px'}}>
+                <div style={{flexGrow: 0, marginRight: '50px'}}>
                     <section style={{marginBottom: '10px'}}>
                         <h3>투자상품 진행상태</h3>
                         <div style={{display: 'grid', gap: '10px'}}>
@@ -107,10 +107,11 @@ export default function ProductDetail() {
                         <div>
                             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                 <div style={{width: '100%'}}>
-                                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', gap: '20px'}}>
 
-                                        <Button variant="contained" size="small" value={`approve`} onClick={e => reviewStatusClickEvent(e)}>승인</Button>
-
+                                        {/*<Button variant="contained" size="medium" value={`approve`} style={{width: '200px'}} onClick={e => reviewStatusClickEvent(e)}>승인</Button>
+                                        <Button variant="contained" size="medium" value={`deny`} style={{width: '200px'}} onClick={e => reviewStatusClickEvent(e)}>반려</Button>
+*/}
                                         <RadioWrap>
                                             <input type="radio" name="reviewStatus" id="approve" defaultChecked={reviewStatus === 'approve' ? true : undefined} onChange={e => setReviewStatus('approve')} />
                                             <label htmlFor="approve">승인</label>
@@ -120,7 +121,9 @@ export default function ProductDetail() {
                                             <label htmlFor="deny">반려</label>
                                         </RadioWrap>
                                     </div>
-                                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', margin: '10px 0'}}>
+                                        {/*<Button variant="contained" size="medium" value={`contract`} style={{width: '200px'}} onClick={e => reviewStatusClickEvent(e)}>배서완료</Button>
+                                        <Button variant="contained" size="medium" value={`register`} style={{width: '200px'}} onClick={e => reviewStatusClickEvent(e)}>상품등록</Button>*/}
                                         <RadioWrap>
                                             <input type="radio" name="reviewStatus" id="contract" defaultChecked={reviewStatus === 'contract' ? true : undefined} onChange={e => setReviewStatus('contract')}/>
                                             <label htmlFor="contract">배서완료</label>
@@ -473,6 +476,7 @@ const RadioWrap = styled.div`
   font-size: 18px;
   font-weight: 700;
   margin: 5px 0;
+  width: 100px;
   
   label {
     margin-left: 5px;
